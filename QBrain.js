@@ -14,19 +14,21 @@ class QBrain {
     this.currentInstructionNumber = 0;
     this.parentReachedBestLevelAtActionNo = 0;
     this.numberOfActions = 0;
-    this.numberOfCoins;
-    this.exploration = 1;
+    this.explorations = [];
+    for (let i = 0; i < 43; i++) this.explorations[i] = 1;
     this.minExploration = 0.01;
     this.explorationDecay = 0.001;
+    this.currentState = null;
+    this.currentAction = null;
+    this.numberOfCoins = 0;
   }
 
   getState() {
-    const x = ~~(this.player.currentPos.x / 10);
-    const y = ~~(this.player.currentPos.y / 10);
+    const x = ~~(this.player.currentPos.x / 5);
+    const y = ~~(this.player.currentPos.y / 20);
     const lvl = this.player.currentLevelNo;
     return `${lvl}_${x}_${y}`;
   }
-
 
   getRandomAction() {
     let isJump = false;
@@ -38,7 +40,7 @@ class QBrain {
       isJump = true;
     }
 
-    let holdTime = Math.round(random(0.1, 1) * 10) / 10;
+    let holdTime = Math.round(random(0.1, 1) * 100) / 100;
     if (random() < chanceOfFullJump) {
       holdTime = 1;
     }
@@ -53,7 +55,7 @@ class QBrain {
     const elements = actionStr.split("_");
     let isJump = false;
     let duration = 0.1;
-    if (elements[0] !== "1") {
+    if (elements[0] == "1") {
       isJump = true;
     }
     let xDirection = Number(elements[1]);
@@ -72,16 +74,12 @@ class QBrain {
     }
     if (
       action == undefined ||
-      this.learner.getQValue(currentState, action) <= 0 ||
-      Math.random() < this.exploration
+      this.learner.knowsAction(action) ||
+      Math.random() < this.explorations[this.currentState.split("_")[0]]
     ) {
       action = this.getRandomAction();
-      console.log("RANDOM: ", action.encoded);
-    } else {
-      console.log("QACTION: ", action.encoded);
     }
     this.currentState = currentState;
-    this.currentFitness = this.player.fitness;
     this.currentAction = action.encoded;
     this.numberOfCoins = this.player.numberOfCoinsPickedUp;
     this.numberOfActions++;
@@ -108,13 +106,14 @@ class QBrain {
       diff = diff * diff;
     }
     const reward = diff + coinValue * this.player.numberOfCoinsPickedUp;
-    console.log(oldState, newState, reward, action);
 
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 
-    if (this.exploration > this.minExploration) {
-        this.exploration = this.exploration - this.exploration * this.explorationDecay;
+    if (this.explorations[newLevel] > this.minExploration) {
+      this.explorations[newLevel] =
+        this.explorations[newLevel] -
+        this.explorations[newLevel] * this.explorationDecay;
     }
   }
 }

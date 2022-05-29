@@ -327,8 +327,6 @@ class Player {
     this.CheckForLevelChange();
     this.CheckForCoinCollisions();
 
-    // console.log(this.currentPos);
-
     if (this.getNewPlayerStateAtEndOfUpdate) {
       if (this.currentLevelNo !== 37) {
         this.playerStateAtStartOfBestLevel.getStateFromPlayer(this);
@@ -593,7 +591,7 @@ class Player {
       // print(chosenLine)
       this.currentNumberOfCollisionChecks += 1;
       if (this.currentNumberOfCollisionChecks > this.maxCollisionChecks) {
-        this.hasFinishedInstructions = true;
+        // this.hasFinishedInstructions = true;
         this.playersDead = true;
       } else {
         this.CheckCollisions(currentLines);
@@ -1193,7 +1191,7 @@ class Player {
         // print("fuck me hes goin under")
         this.currentLevelNo = 1; //lol fixed
         this.playersDead = true;
-        this.hasFinishedInstructions = true;
+        // this.hasFinishedInstructions = true;
       }
       this.currentLevelNo -= 1;
       this.currentPos.y -= height;
@@ -1204,7 +1202,7 @@ class Player {
       ) {
         this.fellToPreviousLevel = true;
         this.fellOnActionNo = this.brain.currentInstructionNumber;
-        this.hasFinishedInstructions = true;
+        // this.hasFinishedInstructions = true;
       }
     }
   }
@@ -1223,7 +1221,7 @@ class Player {
       }
       this.currentAction = this.brain.getNextAction();
       if (this.currentAction === null) {
-        this.hasFinishedInstructions = true;
+        // this.hasFinishedInstructions = true;
         return;
       }
       this.StartCurrentAction();
@@ -1320,7 +1318,7 @@ class Player {
     ) {
       this.fellToPreviousLevel = true;
       this.fellOnActionNo = this.brain.currentInstructionNumber;
-      this.hasFinishedInstructions = true;
+    //   this.hasFinishedInstructions = true;
     }
 
     if (!mutePlayers || testingSinglePlayer) {
