@@ -10,34 +10,14 @@ class QAction {
 class QBrain {
   constructor(player) {
     this.player = player;
-    this.learner = new QLearner(0.8, 0.9);
-    this.actions = [];
-    this.states = [];
+    this.learner = new QLearner(0.99, 0.1);
     this.currentInstructionNumber = 0;
     this.parentReachedBestLevelAtActionNo = 0;
     this.numberOfActions = 0;
     this.numberOfCoins;
-    this.exploration = 0.01;
-
-    for (let level = 0; level < 3; level++) {
-      for (let x = 0; x < 112; x++) {
-        for (let y = 0; y < 90; y++) {
-          this.states.push(`${level}_${x}_${y}`);
-        }
-      }
-    }
-
-    // WALKS
-    this.actions.push(`w_l`);
-    this.actions.push(`w_r`);
-
-    // JUMPS
-    const jumpDirections = ["l", "n", "r"];
-    jumpDirections.forEach((dir) => {
-      for (let dur = 0.1; dur <= 1; dur += 0.1) {
-        this.actions.push(`j_${dir}_${dur}`);
-      }
-    });
+    this.exploration = 1;
+    this.minExploration = 0.01;
+    this.explorationDecay = 0.001;
   }
 
   getState() {
@@ -47,8 +27,12 @@ class QBrain {
     return `${lvl}_${x}_${y}`;
   }
 
+
   getRandomAction() {
     let isJump = false;
+
+    let jumpChance = 0.5;
+    let chanceOfFullJump = 0.2;
 
     if (random() > jumpChance) {
       isJump = true;
@@ -84,7 +68,6 @@ class QBrain {
 
     let action = this.learner.bestAction(currentState);
     if (action) {
-      console.log("QLEARNER ACTION: ", action);
       action = this.decodeAction(action);
     }
     if (
@@ -93,6 +76,9 @@ class QBrain {
       Math.random() < this.exploration
     ) {
       action = this.getRandomAction();
+      console.log("RANDOM: ", action.encoded);
+    } else {
+      console.log("QACTION: ", action.encoded);
     }
     this.currentState = currentState;
     this.currentFitness = this.player.fitness;
@@ -126,5 +112,9 @@ class QBrain {
 
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
+
+    if (this.exploration > this.minExploration) {
+        this.exploration = this.exploration - this.exploration * this.explorationDecay;
+    }
   }
 }

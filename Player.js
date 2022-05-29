@@ -611,7 +611,7 @@ class Player {
   }
 
   Show() {
-    if (this.playersDead) return;
+    // if (this.playersDead) return;
     push();
 
     //if on the previous level and is up the top, then show
