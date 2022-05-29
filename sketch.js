@@ -20,7 +20,7 @@ let run3Image = null;
 let fallenImage = null;
 let fallImage = null;
 let showingLines = false;
-let showingCoins = false;
+let showingCoins = true;
 let levelImages = [];
 
 let placingPlayer = false;

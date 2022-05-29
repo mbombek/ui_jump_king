@@ -17,15 +17,15 @@ class QBrain {
     this.explorations = [];
     for (let i = 0; i < 43; i++) this.explorations[i] = 1;
     this.minExploration = 0.01;
-    this.explorationDecay = 0.001;
+    this.explorationDecay = 0.0001;
     this.currentState = null;
     this.currentAction = null;
     this.numberOfCoins = 0;
   }
 
   getState() {
-    const x = ~~(this.player.currentPos.x / 5);
-    const y = ~~(this.player.currentPos.y / 20);
+    const x = ~~(this.player.currentPos.x / 10);
+    const y = ~~(this.player.currentPos.y / 10);
     const lvl = this.player.currentLevelNo;
     return `${lvl}_${x}_${y}`;
   }
@@ -40,7 +40,7 @@ class QBrain {
       isJump = true;
     }
 
-    let holdTime = Math.round(random(0.1, 1) * 100) / 100;
+    let holdTime = Math.round(random(0.1, 1) * 10) / 10;
     if (random() < chanceOfFullJump) {
       holdTime = 1;
     }
