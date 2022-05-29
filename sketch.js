@@ -72,17 +72,15 @@ function setup() {
   setupCanvas();
   player = new Player();
   population = new Population(600);
+
   qlearner = new QLearner(0.8);
-  q_l = new QBrain();
+  q_l = new QAgent();
+
   setupLevels();
   jumpSound.playMode("sustain");
   fallSound.playMode("sustain");
   bumpSound.playMode("sustain");
   landSound.playMode("sustain");
-
-  // lines.push(new Line(200,height - 80,width - 200, height-80));
-  // lines.push(new Line(10,height - 500,200, height-500));
-  // lines.push(new Line(200,height - 100,200, height-500));
 }
 
 function drawMousePosition() {
@@ -128,15 +126,22 @@ function draw() {
       mutePlayers = true;
     }
   } else {
+    // REPLACE THIS CODE WITH QLEARNING
+    // IF AGENT FINISHED MOVE
     if (population.AllPlayersFinished()) {
+
+      // SELECT NEXT MOVE
       population.GeneticAlgorithm();
       if (population.gen % increaseActionsEveryXGenerations === 0) {
         population.IncreasePlayerMoves(increaseActionsByAmount);
       }
+      // EXECUTE MOVE
+
+      // AGENT LEARN
     }
+
+    // UPDATE AGENT MODEL
     for (let i = 0; i < evolationSpeed; i++) population.Update();
-    // population.Update()
-    // population.Update()
     population.Show();
   }
 
