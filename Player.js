@@ -306,10 +306,11 @@ class Player {
   }
 
   Update() {
-    if (this.playersDead)
-      //|| this.hasFinishedInstructions)
-      return;
+    // if (this.playersDead)
+    //   //|| this.hasFinishedInstructions)
+    //   return;
     let currentLines = levels[this.currentLevelNo].lines;
+
     if (!testingSinglePlayer && !this.hasFinishedInstructions) {
       this.UpdateAIAction();
     }
@@ -1217,6 +1218,9 @@ class Player {
     //if the action hasnt started yet then start it
     //also if the ai is not on the ground and the action has already started then end the action
     if (this.isOnGround && !this.actionStarted) {
+      if (learningType === "q-learning") {
+        this.brain.learn();
+      }
       this.currentAction = this.brain.getNextAction();
       if (this.currentAction === null) {
         this.hasFinishedInstructions = true;

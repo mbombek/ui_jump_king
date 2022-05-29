@@ -139,11 +139,8 @@ function draw() {
     population.Show();
   } else if (!testingSinglePlayer && learningType === "q-learning") {
     levels[player.currentLevelNo].show();
-    if (player.hasFinishedInstructions) {
-      for (let i = 0; i < evolationSpeed; i++) {
-        player.Update();
-        player.brain.learn();
-      }
+    for (let i = 0; i < evolationSpeed; i++) {
+      player.Update();
     }
     player.Show();
   }
