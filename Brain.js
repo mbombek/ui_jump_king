@@ -20,7 +20,6 @@ let jumpChance = 0.5;
 let chanceOfFullJump = 0.2;
 
 class Brain {
-
     constructor(size, randomiseInstructions = true) {
         this.instructions = [];
         this.currentInstructionNumber = 0;
