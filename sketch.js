@@ -45,7 +45,7 @@ let levelDrawn = false;
 let startingPlayerActions = 5;
 let increaseActionsByAmount = 2;
 let increaseActionsEveryXGenerations = 4;
-let evolationSpeed = 8;
+let evolationSpeed = 1;
 
 function preload() {
   backgroundImage = loadImage("images/levelImages/1.png");
@@ -109,8 +109,8 @@ function draw() {
   background(10);
   push();
   translate(0, 50);
+  image(levels[player.currentLevelNo].levelImage, 0, 0);
   if (gameType === "manual") {
-    image(levels[player.currentLevelNo].levelImage, 0, 0);
     levels[player.currentLevelNo].show();
     player.Update();
     player.Show();
