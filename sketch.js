@@ -27,6 +27,9 @@ let placingPlayer = false;
 let placingCoins = false;
 let playerPlaced = false;
 
+let gameTypes = ["manual", "genetic_algorithm", "q-learning"]
+let gameType = "q-learning";
+
 let testingSinglePlayer = true;
 
 let fallSound = null;
@@ -70,11 +73,10 @@ function preload() {
 
 function setup() {
   setupCanvas();
+
   player = new Player();
   population = new Population(600);
-
-  qlearner = new QLearner(0.8);
-  q_l = new QAgent();
+  qAgent = new QAgent(player);
 
   setupLevels();
   jumpSound.playMode("sustain");
@@ -107,12 +109,12 @@ function draw() {
   background(10);
   push();
   translate(0, 50);
-  if (testingSinglePlayer) {
+  if (gameType === "manual") {
     image(levels[player.currentLevelNo].levelImage, 0, 0);
     levels[player.currentLevelNo].show();
     player.Update();
     player.Show();
-  } else if (replayingBestPlayer) {
+  } else if (gameType ==="genetic_algorithm" && replayingBestPlayer) {
     if (!cloneOfBestPlayer.hasFinishedInstructions) {
       for (let i = 0; i < evolationSpeed; i++) {
         cloneOfBestPlayer.Update();
@@ -120,29 +122,25 @@ function draw() {
 
       showLevel(cloneOfBestPlayer.currentLevelNo);
       alreadyShowingSnow = false;
-      //   cloneOfBestPlayer.Show();
     } else {
       replayingBestPlayer = false;
       mutePlayers = true;
     }
-  } else {
-    // REPLACE THIS CODE WITH QLEARNING
-    // IF AGENT FINISHED MOVE
+  } else if (gameType === "genetic_algorithm") {
     if (population.AllPlayersFinished()) {
-
-      // SELECT NEXT MOVE
       population.GeneticAlgorithm();
       if (population.gen % increaseActionsEveryXGenerations === 0) {
         population.IncreasePlayerMoves(increaseActionsByAmount);
       }
-      // EXECUTE MOVE
-
-      // AGENT LEARN
     }
-
-    // UPDATE AGENT MODEL
     for (let i = 0; i < evolationSpeed; i++) population.Update();
     population.Show();
+  } else if (gameType === "q-learning") {
+    if (qAgent.finished()) {
+      qAgent.move();
+    }
+    for (let i = 0; i < evolationSpeed; i++) qAgent.update();
+    qAgent.show();
   }
 
   if (showingLines || creatingLines) showLines();
@@ -158,21 +156,25 @@ function draw() {
   fill(0);
   noStroke();
   rect(0, 0, width, 50);
-  if (!testingSinglePlayer) {
+  if (gameType === "genetic_algorithm") {
     textSize(32);
     fill(255, 255, 255);
     text("FPS: " + previousFrameRate, width - 160, 35);
     text("Gen: " + population.gen, 30, 35);
     text("Moves: " + population.players[0].brain.instructions.length, 200, 35);
     text("Best Height: " + population.bestHeight, 400, 35);
+  } else if (gameType === "q-learning") {
+    textSize(32);
+    fill(255, 255, 255);
+    text("FPS: " + previousFrameRate, width - 160, 35);
+    text("Actions: " + qAgent.numberOfActions, 30, 35);
+    text("Best Height: " + qAgent.player.bestHeightReached, 400, 35);
   }
 }
 
 let previousFrameRate = 120;
 
 function showLevel(levelNumberToShow) {
-  // print(levelNumberToShow)
-  // image(levels[levelNumberToShow].levelImage, 0, 0)
   levels[levelNumberToShow].show();
 }
 

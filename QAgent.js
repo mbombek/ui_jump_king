@@ -1,7 +1,10 @@
 class QAgent {
-  constructor() {
+  constructor(player) {
+    this.player = player;
+    this.qlearner = new QLearner(0.8);
     this.actions = [];
     this.states = [];
+    this.numberOfActions = 0;
 
     for (let level = 0; level < 43; level++) {
       for (let x = 0; x < 224; x++) {
@@ -22,23 +25,28 @@ class QAgent {
         this.actions.push(`j_${dir}_${dur}`);
       }
     });
-    
-    this.finishedMove = true;
   }
 
-  getNextMove() {
-    // TODO
+  getState() {
+    const x = this.player.currentPos.x;
+    const y = this.player.currentPos.y;
+    const lvl = this.currentLevelNumber;
+    return `${lvl}_${x}_${y}`;
   }
 
   finished() {
-    return this.finishedMove;
+    return this.player.hasFinishedInstructions;
+  }
+
+  move() {
+    const state = this.getState();
   }
 
   show() {
-    // TODO
+    this.player.Show()
   }
 
   update() {
-    // TODO
+    this.player.Update();
   }
 }

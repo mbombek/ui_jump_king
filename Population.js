@@ -152,7 +152,7 @@ class Population {
         this.players[i].loadStartOfBestLevelPlayerState();
       }
     }
-    console.log(this.players.length)
+
     this.gen++;
   }
 
