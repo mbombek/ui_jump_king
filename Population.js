@@ -113,7 +113,7 @@ class Population {
     return true;
   }
 
-  NaturalSelection() {
+  GeneticAlgorithm() {
     let nextGen = [];
     this.SetBestPlayer();
     this.CalculateFitnessSum();

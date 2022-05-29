@@ -1,3 +1,5 @@
+// const QLearner = require("./QLearner");
+
 let width = 0;
 let height = 0;
 let canvas = null;
@@ -18,14 +20,14 @@ let run3Image = null;
 let fallenImage = null;
 let fallImage = null;
 let showingLines = false;
-let showingCoins = true;
+let showingCoins = false;
 let levelImages = [];
 
 let placingPlayer = false;
 let placingCoins = false;
 let playerPlaced = false;
 
-let testingSinglePlayer = false;
+let testingSinglePlayer = true;
 
 let fallSound = null;
 let jumpSound = null;
@@ -70,6 +72,8 @@ function setup() {
   setupCanvas();
   player = new Player();
   population = new Population(600);
+  qlearner = new QLearner(0.8);
+  q_l = new QBrain();
   setupLevels();
   jumpSound.playMode("sustain");
   fallSound.playMode("sustain");
@@ -103,22 +107,6 @@ let levelNumber = 0;
 
 function draw() {
   background(10);
-
-  // if(frameCount % 5==0 ){
-  //
-  //     levelNumber  = (levelNumber +1)%43;
-  // }
-  // image(backgroundImage,0,0);
-  // if (!creatingLines) {
-
-  //     if (!placingPlayer || playerPlaced) {
-  //
-  //         player.Update();
-  //         player.Show();
-  //     }
-  // } else {
-  //     image(levelImages[levelNumber], 0, 0)
-  // }
   push();
   translate(0, 50);
   if (testingSinglePlayer) {
@@ -141,7 +129,7 @@ function draw() {
     }
   } else {
     if (population.AllPlayersFinished()) {
-      population.NaturalSelection();
+      population.GeneticAlgorithm();
       if (population.gen % increaseActionsEveryXGenerations === 0) {
         population.IncreasePlayerMoves(increaseActionsByAmount);
       }
@@ -337,12 +325,3 @@ function mouseClicked() {
       ' , "progress" ));'
   );
 }
-
-//todo
-// things to do
-// - when a player lands in a new level, record the game state and start the next evolution at that point DONE
-// - when a player falls into a previous level, end the players movements, and mutate that move which fucked them up with a 100% chance
-// fix landing logic so it checks below maybe, or it checks after all the corrections are done that there is still something below it. actually lets do that now. i dont knwo why im still typing this
-
-// - add a player replay, we could also include a generation replay, thats probably it
-// - maybe consider adding a goal system for really hard levels.

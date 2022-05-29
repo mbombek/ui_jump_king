@@ -16,11 +16,8 @@ class AIAction {
     }
 }
 
-
-// let jumpChance = 0; //the chance that a random action is a jump
-let jumpChance = 0.5; //the chance that a random action is a jump
+let jumpChance = 0.5; 
 let chanceOfFullJump = 0.2;
-// let chanceOfFullJump = 0.2;
 
 class Brain {
 
