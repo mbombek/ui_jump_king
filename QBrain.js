@@ -21,7 +21,6 @@ class QBrain {
     this.qlearner = new QLearner(0.8);
     this.actions = [];
     this.states = [];
-    this.instructions = [];
     this.currentInstructionNumber = 0;
     this.parentReachedBestLevelAtActionNo = 0;
     this.numberOfActions = 0;
@@ -48,95 +47,15 @@ class QBrain {
   }
 
   getState() {
-    const x = Math.floor(this.player.currentPos.x);
-    const y = Math.floor(this.player.currentPos.y);
+    const x = Math.floor(this.player.currentPos.x / 5);
+    const y = Math.floor(this.player.currentPos.y / 5);
     const lvl = this.player.currentLevelNo;
     console.log(`${lvl}_${x}_${y}`)
     return `${lvl}_${x}_${y}`;
   }
 
-  getRandomAction() {
-    let isJump = false;
-
-    if (random() > jumpChance) {
-      isJump = true;
-    }
-
-    let holdTime = random(0.1, 1);
-    if (random() < chanceOfFullJump) {
-      holdTime = 1;
-    }
-
-    let directions = [-1, -1, -1, 0, 1, 1, 1];
-    let xDirection = random(directions);
-
-    return new QAction(isJump, holdTime, xDirection);
-  }
-
   getNextAction() {
-    if (this.currentInstructionNumber >= this.instructions.length) {
-      return null;
-    }
-    this.currentInstructionNumber += 1;
-    return this.instructions[this.currentInstructionNumber - 1];
-  }
-
-  clone() {
-    let clone = new Brain(this.size, false);
-    clone.instructions = [];
-    for (let i = 0; i < this.instructions.length; i++) {
-      clone.instructions.push(this.instructions[i].clone());
-    }
-    return clone;
-  }
-
-  mutate() {
-    let mutationRate = 0.3;
-    let chanceOfNewInstruction = 0.2;
-    for (
-      let i = this.parentReachedBestLevelAtActionNo;
-      i < this.instructions.length;
-      i++
-    ) {
-      if (random() < chanceOfNewInstruction) {
-        this.instructions[i] = this.getRandomAction();
-      } else if (random() < mutationRate) {
-        this.instructions[i].mutate();
-      }
-    }
-  }
-
-  mutateAlpha() {
-    let mutationRate = 0.5;
-    let chanceOfNewInstruction = 0.3;
-    for (
-      let i = this.parentReachedBestLevelAtActionNo;
-      i < this.instructions.length;
-      i++
-    ) {
-      if (random() < chanceOfNewInstruction) {
-        this.instructions[i] = this.getRandomAction();
-      } else if (random() < mutationRate) {
-        this.instructions[i].mutate();
-      }
-    }
-  }
-
-  mutateActionNumber(actionNumber) {
-    // let mutationRate = 0.1;
-
-    actionNumber -= 1; // this is done because im a bad programmer
-    let chanceOfNewInstruction = 0.1;
-    if (random() < chanceOfNewInstruction) {
-      this.instructions[actionNumber] = this.getRandomAction();
-    } else {
-      this.instructions[actionNumber].mutate();
-    }
-  }
-
-  increaseMoves(increaseMovesBy) {
-    for (var i = 0; i < increaseMovesBy; i++) {
-      this.instructions.push(this.getRandomAction());
-    }
+    const state = getState();
+    return this.getRandomAction()
   }
 }

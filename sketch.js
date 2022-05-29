@@ -139,9 +139,9 @@ function draw() {
     population.Show();
   } else if (!testingSinglePlayer && learningType === "q-learning") {
     levels[player.currentLevelNo].show();
-    // if (player.hasFinishedInstructions) {
-    //   player.brain.getRandomAction();
-    // }
+    if (player.hasFinishedInstructions) {
+      player.brain.instructions.push(player.brain.getRandomAction());
+    }
     for (let i = 0; i < evolationSpeed; i++) player.Update();
     player.Show();
   }
@@ -175,7 +175,7 @@ function draw() {
   }
 }
 
-let previousFrameRate = 120;
+let previousFrameRate = 60;
 
 function showLevel(levelNumberToShow) {
   levels[levelNumberToShow].show();
