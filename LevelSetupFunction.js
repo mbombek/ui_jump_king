@@ -1686,6 +1686,7 @@ function setupLevels() {
     // levels[0].coins.push(new Coin( 1061,653));
     levels[2].coins.push(new Coin(805, 710));
     levels[3].coins.push(new Coin(369, 508));
+    levels[3].coins.push(new Coin(416, 181));
     levels[4].coins.push(new Coin(143, 160));
     levels[5].coins.push(new Coin(298, 231));
     levels[5].coins.push(new Coin(801, 140));

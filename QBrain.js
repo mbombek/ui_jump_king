@@ -10,14 +10,14 @@ class QAction {
 class QBrain {
   constructor(player) {
     this.player = player;
-    this.learner = new QLearner(0.99, 0.1);
+    this.learner = new QLearner(0.9, 0.8);
     this.currentInstructionNumber = 0;
     this.parentReachedBestLevelAtActionNo = 0;
     this.numberOfActions = 0;
     this.explorations = [];
     for (let i = 0; i < 43; i++) this.explorations[i] = 1;
     this.minExploration = 0.01;
-    this.explorationDecay = 0.0001;
+    this.explorationDecay = 0.0005;
     this.currentState = null;
     this.currentAction = null;
     this.numberOfCoins = 0;
@@ -74,14 +74,14 @@ class QBrain {
     }
     if (
       action == undefined ||
-      this.learner.knowsAction(action) ||
+      // this.learner.getQValue(currentState, action) <= 0 ||
       Math.random() < this.explorations[this.currentState.split("_")[0]]
     ) {
       action = this.getRandomAction();
     }
+
     this.currentState = currentState;
     this.currentAction = action.encoded;
-    this.numberOfCoins = this.player.numberOfCoinsPickedUp;
     this.numberOfActions++;
     return action;
   }
@@ -94,26 +94,23 @@ class QBrain {
     }
     const newState = this.getState();
 
-    const coinValue = 500000;
+    const coinValue = 50;
     const oldLevel = oldState.split("_")[0];
     const oldHeight = oldState.split("_")[2];
     const newLevel = newState.split("_")[0];
     const newHeight = newState.split("_")[2];
-    let diff = newLevel * height - newHeight - (oldLevel * height - oldHeight);
-    if (diff < 0) {
-      diff = -diff * diff;
-    } else {
-      diff = diff * diff;
-    }
-    const reward = diff + coinValue * this.player.numberOfCoinsPickedUp;
 
+    let diff = newLevel * height - newHeight - (oldLevel * height - oldHeight);
+    const reward = diff + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 
+    this.numberOfCoins = this.player.numberOfCoinsPickedUp;
     if (this.explorations[newLevel] > this.minExploration) {
       this.explorations[newLevel] =
         this.explorations[newLevel] -
         this.explorations[newLevel] * this.explorationDecay;
     }
+    console.log(oldState, newState, reward, action, this.explorations[newLevel]);
   }
 }

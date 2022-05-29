@@ -43,7 +43,7 @@ let levelDrawn = false;
 let startingPlayerActions = 5;
 let increaseActionsByAmount = 2;
 let increaseActionsEveryXGenerations = 4;
-let evolationSpeed = 1;
+let evolationSpeed = 200;
 
 function preload() {
   backgroundImage = loadImage("images/levelImages/1.png");
@@ -271,6 +271,13 @@ function keyReleased() {
         mousePos1 = null;
         mousePos2 = null;
       }
+      break;
+    case "F":
+      evolationSpeed = 1;
+      break;
+    case "G":
+      evolationSpeed = 400;
+      break;
   }
 
   switch (keyCode) {
@@ -281,12 +288,12 @@ function keyReleased() {
       player.rightHeld = false;
       break;
     case DOWN_ARROW:
-      evolationSpeed = constrain(evolationSpeed - 1, 0, 50);
+      evolationSpeed = constrain(evolationSpeed - 1, 0, 400);
       print(evolationSpeed);
 
       break;
     case UP_ARROW:
-      evolationSpeed = constrain(evolationSpeed + 1, 0, 50);
+      evolationSpeed = constrain(evolationSpeed + 1, 0, 400);
       print(evolationSpeed);
       break;
   }
