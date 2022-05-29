@@ -10,13 +10,13 @@ class QAction {
 class QBrain {
   constructor(player) {
     this.player = player;
-    this.learner = new QLearner(0.9, 0.8);
+    this.learner = new QLearner(0.9, 0.5);
     this.currentInstructionNumber = 0;
     this.parentReachedBestLevelAtActionNo = 0;
     this.numberOfActions = 0;
     this.explorations = [];
     for (let i = 0; i < 43; i++) this.explorations[i] = 1;
-    this.minExploration = 0.01;
+    this.minExploration = 0.1;
     this.explorationDecay = 0.0005;
     this.currentState = null;
     this.currentAction = null;
@@ -33,7 +33,7 @@ class QBrain {
   getRandomAction() {
     let isJump = false;
 
-    let jumpChance = 0.5;
+    let jumpChance = 0.7;
     let chanceOfFullJump = 0.2;
 
     if (random() > jumpChance) {
@@ -101,7 +101,14 @@ class QBrain {
     const newHeight = newState.split("_")[2];
 
     let diff = newLevel * height - newHeight - (oldLevel * height - oldHeight);
-    const reward = diff + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
+
+    let exitdist = 0;
+    let currentExitCoin = levels[this.player.currentLevelNo].exitcoin;
+    if (currentExitCoin) {
+      exitdist = Math.sqrt(currentExitCoin.exitDist(this.player));
+    }
+
+    const reward = diff - exitdist + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 

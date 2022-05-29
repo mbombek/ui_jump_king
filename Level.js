@@ -6,6 +6,7 @@ class Level {
     this.isBlizzardLevel = false;
     this.isIceLevel = false;
     this.coins = [];
+    this.exitCoin = null;
     this.hasProgressionCoins = false;
   }
 
@@ -18,6 +19,7 @@ class Level {
       }
     }
     if (showingCoins) {
+      if (this.exitCoin) this.exitCoin.show();
       for (let c of this.coins) {
         c.show();
       }
