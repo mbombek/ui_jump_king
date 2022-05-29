@@ -8,8 +8,6 @@ class QAgent {
     f
   }
 
-  
-
   finished() {
     return this.player.hasFinishedInstructions;
   }
