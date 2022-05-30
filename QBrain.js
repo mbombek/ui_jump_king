@@ -102,13 +102,37 @@ class QBrain {
 
     let diff = newLevel * height - newHeight - (oldLevel * height - oldHeight);
 
+    /*
+      PROBLEMATIC HEIGHTS:
+        5285: (18, 4489) -> (30, 4479)
+        5845: (71, 5355) -> (46, 5347)
+        7945: (20, 7185)
+
+
+
+    */
+
     let exitdist = 0;
     let currentExitCoin = levels[this.player.currentLevelNo].exitcoin;
     if (currentExitCoin) {
       exitdist = Math.sqrt(currentExitCoin.exitDist(this.player));
     }
 
-    const reward = diff - exitdist + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
+    let reward = diff - exitdist + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
+    if (oldHeight == 5355 && newHeight == 5347) {
+      reward = 500;
+    } else if (oldHeight == 5347 && newHeight == 5355)  {
+      reward = -500;
+    } else if (oldHeight == 4489 && newHeight == 4479)  {
+      reward = 500;
+    } else if (oldHeight == 4479 && newHeight == 4489)  {
+      reward = -500;
+    }
+
+    if (this.player.bestHeightReached == 5845 || this.player.bestHeightReached == 5285 || this.player.bestHeightReached == 7945)  {
+      console.log(oldHeight, newHeight);
+    }
+
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 
