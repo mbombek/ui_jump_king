@@ -112,12 +112,6 @@ class QBrain {
       this.exitCoinDist = exitDist;
     }
 
-    let currentRewardCoins = levels[this.player.currentLevelNo].coins.filter(
-      (item) => item.type == "reward"
-    );
-
-    if (currentRewardCoins) exitDistDiff = 0;
-
     const reward =
       diff +
       exitDistDiff +
