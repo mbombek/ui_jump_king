@@ -118,6 +118,10 @@ class QBrain {
         this.explorations[newLevel] -
         this.explorations[newLevel] * this.explorationDecay;
     }
-    console.log(oldState, newState, reward, action, this.explorations[newLevel]);
+    //console.log(oldState, newState, reward, action, this.explorations[newLevel]);
+  }
+
+  saveQlearner()  {
+    return;
   }
 }
