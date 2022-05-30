@@ -1408,6 +1408,9 @@ class Player {
               this.numberOfCoinsPickedUp += 1;
               print("COLLISION COIN THING");
             }
+          } else if (currentLevel.coins[i].type == "end") {
+            console.log("DONE DID IT")
+            this.ResetPlayer()
           } else {
             this.coinsPickedUpIndexes.push(i);
             this.numberOfCoinsPickedUp += 0; // dont increase coins picked up
