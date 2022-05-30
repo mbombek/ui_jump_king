@@ -342,7 +342,6 @@ class Player {
 
     this.playersDead = false;
     this.previousSpeed = createVector(0, 0);
-    this.bestHeightReached = 0;
     this.reachedHeightAtStepNo = 0;
 
     this.fitness = 0;
