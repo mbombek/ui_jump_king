@@ -23,11 +23,10 @@ class QBrain {
     this.numberOfCoins = 0;
   }
 
-  getState(coin) {
+  getState() {
     const x = ~~(this.player.currentPos.x / 10);
     const y = ~~(this.player.currentPos.y / 10);
     const lvl = this.player.currentLevelNo;
-    const exitDist = this.player.exitDist(coin)
     return `${lvl}_${x}_${y}`;
   }
 
@@ -94,6 +93,7 @@ class QBrain {
     if (!oldState) {
       return;
     }
+    const newState = this.getState();
     
     const coinValue = 50;
     const oldLevel = oldState.split("_")[0];
