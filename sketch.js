@@ -114,6 +114,7 @@ function draw() {
     let y = ~~(player.currentPos.y / 10);
     const lvl = player.currentLevelNo;
     console.log(x, lvl * height - y);
+    console.log(player.currentPos.x, player.currentPos.y);
   } else if (
     !testingSinglePlayer &&
     learningType === "genetic_algorithm" &&
@@ -270,6 +271,10 @@ function keyReleased() {
         player.currentLevelNo += 1;
         print(player.currentLevelNo);
       }
+      break;
+    case "M":
+      player.currentLevelNo -= 1;
+      print(player.currentLevelNo);
       break;
     case "D":
       if (creatingLines) {

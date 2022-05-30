@@ -167,7 +167,7 @@ class QBrain {
         reward = -500;
       }
     if (reward == 0)  {
-      reward = -100;
+      reward = -10;
     }
     // console.log(reward);
     this.learner.add(oldState, newState, reward, action);

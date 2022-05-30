@@ -303,6 +303,52 @@ class Player {
       coinValue * this.numberOfCoinsPickedUp;
   }
 
+  to32(newLvl, x, y)  {
+    this.currentPos = createVector(x, y); // this is the top left corner of the hitbox
+    this.currentSpeed = createVector(0, 0);
+    this.isOnGround = false;
+
+    this.jumpHeld = false;
+    this.jumpTimer = 0;
+    this.leftHeld = false;
+    this.rightHeld = false;
+
+    this.facingRight = true;
+    this.hasBumped = false;
+    this.isRunning = false;
+    this.isSlidding = false;
+    this.currentRunIndex = 1;
+    this.sliddingRight = false;
+
+    // this.currentLevel = null;
+    this.currentLevelNo = newLvl;
+
+    this.jumpStartingHeight = 0;
+    this.hasFallen = false;
+
+    this.blizzardForce = 0;
+    this.blizzardForceAccelerationDirection = 1;
+    this.maxBlizzardForceTimer = 0;
+    this.snowImagePosition = 0;
+
+    // ai shit
+    this.aiActionTimer = 0;
+    this.aiActionMaxTime = 0;
+    this.isWaitingToStartAction = false;
+    this.actionStarted = false;
+
+    this.brain.currentInstructionNumber = 0;
+    this.currentAction = null;
+
+    this.playersDead = false;
+    this.previousSpeed = createVector(0, 0);
+    this.bestHeightReached = 0;
+    this.reachedHeightAtStepNo = 0;
+
+    this.fitness = 0;
+    this.hasFinishedInstructions = false;
+  }
+
   Update() {
     let currentLines = levels[this.currentLevelNo].lines;
     if (!testingSinglePlayer && !this.hasFinishedInstructions) {
@@ -310,7 +356,7 @@ class Player {
     }
     this.UpdatePlayerSlide(currentLines);
     this.ApplyGravity();
-    this.ApplyBlizzardForce();
+    // this.ApplyBlizzardForce();
     this.UpdatePlayerRun(currentLines);
     this.currentPos.add(this.currentSpeed);
     if (this.currentPos.x < -20 || this.currentPos.x > 1200)  {
@@ -325,6 +371,12 @@ class Player {
     this.CheckCollisions(currentLines);
     this.UpdateJumpTimer();
     this.CheckForLevelChange();
+    if (this.currentLevelNo == 25) {
+      this.to32(32, 802, 615);
+    }
+    if (this.currentLevelNo == 31)  {
+      this.to32(24, 240, 50);
+    }
     this.CheckForCoinCollisions();
 
     if (this.getNewPlayerStateAtEndOfUpdate) {
@@ -898,10 +950,10 @@ class Player {
 
   UpdatePlayerRun(currentLines) {
     this.isRunning = false;
-    let runAllowed =
-      !levels[this.currentLevelNo].isBlizzardLevel ||
-      this.currentLevelNo === 31 ||
-      this.currentLevelNo == 25;
+    let runAllowed = true;
+      //!levels[this.currentLevelNo].isBlizzardLevel ||
+      //this.currentLevelNo === 31 ||
+      //this.currentLevelNo == 25;
     if (this.isOnGround) {
       if (!this.IsPlayerOnGround(currentLines)) {
         this.isOnGround = false;
