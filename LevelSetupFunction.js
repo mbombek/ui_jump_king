@@ -1713,6 +1713,7 @@ function setupLevels() {
     levels[13].exitCoin = new Coin(517, 0, "exit");
     // levels[14].exitcoin = new Coin(525, 0, "exit");
     // levels[15].exitcoin = new Coin(700, 0, "exit");
+    levels[16].exitCoin = new Coin(130, 0, "exit");
 
     levels[1].hasProgressionCoins = true;
     levels[2].hasProgressionCoins = true;

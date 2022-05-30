@@ -98,8 +98,10 @@ class QBrain {
     const coinValue = 50;
     const oldLevel = oldState.split("_")[0];
     const oldHeight = oldState.split("_")[2];
+    const oldWidth = oldState.split("_")[1];
     const newLevel = newState.split("_")[0];
     const newHeight = newState.split("_")[2];
+    const newWidth = newState.split("_")[1];
 
     let diff = newLevel * height - newHeight - (oldLevel * height - oldHeight);
 
@@ -125,58 +127,33 @@ class QBrain {
       exitDistDiff +
       coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
 
-    if (
-      oldLevel * height - oldHeight == 5355 &&
-      newLevel * height - newHeight == 5347
-    ) {
-      reward = 500;
-    } else if (
-      oldLevel * height - oldHeight == 5347 &&
-      newLevel * height - newHeight == 5355
-    ) {
-      reward = -500;
-    } else if (
-      oldLevel * height - oldHeight == 4489 &&
-      newLevel * height - newHeight == 4479
-    ) {
-      reward = 500;
-    } else if (
-      oldLevel * height - oldHeight == 4479 &&
-      newLevel * height - newHeight == 4489
-    ) {
-      reward = -500;
-    } else if (
-      oldLevel * height - oldHeight == 7185 &&
-      newLevel * height - newHeight == 7173
-    ) {
-      reward = 500;
-    } else if (
-      oldLevel * height - oldHeight == 7173 &&
-      newLevel * height - newHeight == 7185
-    ) {
-      reward = -500;
-    } else if (
-      oldLevel * height - oldHeight == 7173 &&
-      newLevel * height - newHeight == 7155
-    ) {
-      reward = 500;
-    } else if (
-      oldLevel * height - oldHeight == 7155 &&
-      newLevel * height - newHeight == 7173
-    ) {
-      reward = -500;
-    } else if (
-      oldLevel * height - oldHeight == 7185 &&
-      newLevel * height - newHeight == 7155
-    ) {
-      reward = 500;
-    } else if (
-      oldLevel * height - oldHeight == 7155 &&
-      newLevel * height - newHeight == 7185
-    ) {
-      reward = -500;
-    }
+      if (oldLevel * height - oldHeight == 5355 && newLevel * height - newHeight == 5347) {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 5347 && newLevel * height - newHeight == 5355)  {
+        reward = -500;
+      } else if (oldLevel * height - oldHeight == 4489 && newLevel * height - newHeight == 4479 && oldWidth < 25)  {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 4479 && newLevel * height - newHeight == 4489 && newWidth < 25)  {
+        reward = -500;
+      } else if (oldLevel * height - oldHeight == 7185 && newLevel * height - newHeight == 7173 && oldWidth < 40)  {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 7173 && newLevel * height - newHeight == 7185 && newWidth < 40)  {
+        reward = -500;
+      } else if (oldLevel * height - oldHeight == 7173 && newLevel * height - newHeight == 7155)  {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 7155 && newLevel * height - newHeight == 7173)  {
+        reward = -500;
+      } else if (oldLevel * height - oldHeight == 7185 && newLevel * height - newHeight == 7155 && oldWidth < 40)  {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 7155 && newLevel * height - newHeight == 7185 && newWidth < 40)  {
+        reward = -500;
+      } else if (oldLevel * height - oldHeight == 14365 && newLevel * height - newHeight == 14343 && oldWidth > 100)  {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 14343 && newLevel * height - newHeight == 14365 && newWidth > 100)  {
+        reward = -500;
+      }
     // console.log(reward)
+    /*
     if (
       this.player.bestHeightReached == 5845 ||
       this.player.bestHeightReached == 5285 ||
@@ -188,7 +165,7 @@ class QBrain {
         reward
       );
     }
-
+    */
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 

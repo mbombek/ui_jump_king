@@ -27,7 +27,7 @@ let playerPlaced = false;
 
 let testingSinglePlayer = false;
 let learningType = "q-learning"; // either q-learning or defaults to genetic alg
-let loadCachedQlearner = true;
+let loadCachedQlearner = false;
 
 let fallSound = null;
 let jumpSound = null;
