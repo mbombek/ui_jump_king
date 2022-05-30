@@ -173,16 +173,10 @@ function draw() {
     fill(255, 255, 255);
     text("FPS: " + previousFrameRate, width - 160, 35);
     text("Actions: " + player.brain.numberOfActions, 30, 35);
-    text("Best Height: " + player.bestHeightReached, 400, 35);
+    text("Best Height: " + player.bestHeightReached, 240, 35);
+    text("Current: " + ~~player.GetGlobalHeight(), 560, 35);
+    text("Level: " + player.currentLevelNo, 800, 35);
   }
-  /*
-  if (player.bestHeightReached == 15965)  {
-    testingSinglePlayer = true;
-    learningType = "manual";
-    mutePlayers = true;
-  }
-  */
-
 }
 
 let previousFrameRate = 60;
