@@ -936,7 +936,7 @@ function setupLevels() {
     tempLevel.lines.push(new Line(980, 580, 960, 580));
     tempLevel.lines.push(new Line(960, 580, 960, 620));
     tempLevel.lines.push(new Line(960, 620, 840, 740));
-    tempLevel.lines.push(new Line(840, 740, 1100, 740));
+    //tempLevel.lines.push(new Line(840, 740, 1100, 740));
     tempLevel.lines.push(new Line(520, 560, 520, 620));
     tempLevel.lines.push(new Line(520, 620, 700, 620));
     tempLevel.lines.push(new Line(700, 620, 700, 560));
@@ -946,7 +946,7 @@ function setupLevels() {
     tempLevel.lines.push(new Line(600, 220, 620, 220));
     tempLevel.lines.push(new Line(620, 220, 620, 320));
     tempLevel.lines.push(new Line(620, 320, 740, 440));
-    tempLevel.lines.push(new Line(740, 440, 480, 440));
+    //tempLevel.lines.push(new Line(740, 440, 480, 440));
     tempLevel.lines.push(new Line(260, 540, 160, 540));
     tempLevel.lines.push(new Line(160, 540, 160, 480));
     tempLevel.lines.push(new Line(160, 480, 260, 480));
@@ -956,7 +956,7 @@ function setupLevels() {
     tempLevel.lines.push(new Line(240, 140, 260, 140));
     tempLevel.lines.push(new Line(260, 140, 260, 240));
     tempLevel.lines.push(new Line(260, 240, 380, 360));
-    tempLevel.lines.push(new Line(380, 360, 120, 360));
+    //tempLevel.lines.push(new Line(380, 360, 120, 360));
     levels.push(tempLevel);
     tempLevel = new Level();
     tempLevel.lines.push(new Line(20, 900, 20, 780));
@@ -1717,6 +1717,7 @@ function setupLevels() {
     levels[17].exitCoin = new Coin(1115, 0, "exit");
     // levels[18].exitCoin = new Coin(1115, 0, "exit");
     levels[21].exitCoin = new Coin(640, 0, "exit");
+    levels[24].exitCoin = new Coin(340, 0, "exit");
 
 
     levels[1].hasProgressionCoins = true;
