@@ -106,10 +106,8 @@ class QBrain {
       PROBLEMATIC HEIGHTS:
         5285: (18, 4489) -> (30, 4479)
         5845: (71, 5355) -> (46, 5347)
-        7945: (20, 7185)
-
-
-
+        7945: (20, 7185) -> (45, 7173)
+        7945: (45, 7173) -> (27, 7155)
     */
 
     let exitdist = 0;
@@ -119,6 +117,7 @@ class QBrain {
     }
 
     let reward = diff - exitdist + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
+    
     if (oldLevel * height - oldHeight == 5355 && newLevel * height - newHeight == 5347) {
       reward = 500;
     } else if (oldLevel * height - oldHeight == 5347 && newLevel * height - newHeight == 5355)  {
@@ -127,8 +126,16 @@ class QBrain {
       reward = 500;
     } else if (oldLevel * height - oldHeight == 4479 && newLevel * height - newHeight == 4489)  {
       reward = -500;
+    } else if (oldLevel * height - oldHeight == 7185 && newLevel * height - newHeight == 7173)  {
+      reward = 500;
+    } else if (oldLevel * height - oldHeight == 7173 && newLevel * height - newHeight == 7185)  {
+      reward = -500;
+    } else if (oldLevel * height - oldHeight == 7173 && newLevel * height - newHeight == 7155)  {
+      reward = 500;
+    } else if (oldLevel * height - oldHeight == 7155 && newLevel * height - newHeight == 7173)  {
+      reward = -500;
     }
-
+    console.log(reward)
     if (this.player.bestHeightReached == 5845 || this.player.bestHeightReached == 5285 || this.player.bestHeightReached == 7945)  {
       console.log(oldLevel * height - oldHeight, newLevel * height - newHeight);
     }
