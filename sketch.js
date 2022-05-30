@@ -27,6 +27,7 @@ let playerPlaced = false;
 
 let testingSinglePlayer = false;
 let learningType = "q-learning"; // either q-learning or defaults to genetic alg
+let loadCachedQlearner = true;
 
 let fallSound = null;
 let jumpSound = null;
@@ -41,7 +42,7 @@ let levelDrawn = false;
 let startingPlayerActions = 5;
 let increaseActionsByAmount = 2;
 let increaseActionsEveryXGenerations = 4;
-let evolationSpeed = 400;
+let evolationSpeed = 1;
 
 function preload() {
   backgroundImage = loadImage("images/levelImages/1.png");
@@ -112,7 +113,6 @@ function draw() {
     let x = ~~(player.currentPos.x / 10);
     let y = ~~(player.currentPos.y / 10);
     const lvl = player.currentLevelNo;
-    console.log(x, lvl * height - y);
   } else if (
     !testingSinglePlayer &&
     learningType === "genetic_algorithm" &&
@@ -280,10 +280,6 @@ function keyReleased() {
     case "G":
       evolationSpeed = 1000;
       break;
-    case "L":
-      player.brain.saveQlearner();
-      console.log("QTABLE SAVED");
-      break;
     case "P":
       testingSinglePlayer = true;
       learningType = "manual";
@@ -291,6 +287,9 @@ function keyReleased() {
       break;
     case "H":
       console.log(player.brain.learner.qValuesTable);
+      console.log(player.brain.learner.states);
+      console.log(player.brain.learner.statesList);
+      console.log(player.brain.explorations);
       evolationSpeed = 0;
       break;
   }

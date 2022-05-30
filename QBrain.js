@@ -22,6 +22,7 @@ class QBrain {
     this.currentAction = null;
     this.numberOfCoins = 0;
     this.exitCoinDist = 0;
+    this.loadQlearner();
   }
 
   getState() {
@@ -75,7 +76,7 @@ class QBrain {
     }
     if (
       action == undefined ||
-      Math.random() < this.explorations[this.currentState.split("_")[0]]
+      Math.random() < this.explorations[currentState.split("_")[0]]
     ) {
       action = this.getRandomAction();
     }
@@ -200,7 +201,30 @@ class QBrain {
     //console.log(oldState, newState, reward, action, this.explorations[newLevel]);
   }
 
-  saveQlearner() {
-    return;
+  loadQlearner() {
+    if (!loadCachedQlearner) return;
+    this.learner.qValuesTable = cachedQtable;
+    this.explorations = cachedExplorations;
+    console.log(cachedExplorations)
+    let states = {};
+    let statesList = [];
+    for (const [state_name, val] of Object.entries(cachedStates)) {
+      let state = new State(state_name);
+      state.actions = {};
+      state.actionsList = [];
+      for (const [action_name, act_val] of Object.entries(val)) {
+        let action = new Action(
+          act_val["nextState"],
+          act_val["reward"],
+          action_name
+        );
+        state.actions[action_name] = action;
+        state.actionsList.push(action);
+      }
+      states[state_name] = state;
+      statesList.push(state);
+    }
+    this.learner.states = states;
+    this.learner.statesList = statesList;
   }
 }
