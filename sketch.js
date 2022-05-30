@@ -283,6 +283,10 @@ function keyReleased() {
     case "G":
       evolationSpeed = 400;
       break;
+    case "H":
+      console.log(player.brain.learner.qValuesTable);
+      evolationSpeed = 0;
+      break;
   }
 
   switch (keyCode) {

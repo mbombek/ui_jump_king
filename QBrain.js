@@ -75,7 +75,6 @@ class QBrain {
     }
     if (
       action == undefined ||
-      // this.learner.getQValue(currentState, action) <= 0 ||
       Math.random() < this.explorations[this.currentState.split("_")[0]]
     ) {
       action = this.getRandomAction();
