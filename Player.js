@@ -467,17 +467,18 @@ class Player {
 
         if (collidedLines.length > 1) {
           potentialLanding = true;
-          if (levels[this.currentLevelNo].isIceLevel) {
-            this.currentSpeed.y = 0;
-            if (this.IsMovingRight()) {
-              this.currentSpeed.x -= iceFrictionAcceleration;
-            } else {
-              this.currentSpeed.x += iceFrictionAcceleration;
-            }
-          } else {
-            this.currentSpeed = createVector(0, 0);
-          }
+          //if (levels[this.currentLevelNo].isIceLevel) {
+          //  this.currentSpeed.y = 0;
+          //  if (this.IsMovingRight()) {
+          //    this.currentSpeed.x -= iceFrictionAcceleration;
+          //  } else {
+          //    this.currentSpeed.x += iceFrictionAcceleration;
+          //  }
+          //} else {
+          //  this.currentSpeed = createVector(0, 0);
+          //}
           // print("potentail landing on nooooooo")
+          this.currentSpeed = createVector(0, 0);
         } else {
           this.playerLanded();
         }
@@ -969,51 +970,55 @@ class Player {
           this.hasFallen = false;
           this.isRunning = true;
           this.facingRight = true;
-          if (!levels[this.currentLevelNo].isIceLevel) {
-            this.currentSpeed = createVector(runSpeed, 0);
-          } else {
-            this.currentSpeed.x += playerIceRunAcceleration;
-            this.currentSpeed.x = min(runSpeed, this.currentSpeed.x);
-          }
+          //if (!levels[this.currentLevelNo].isIceLevel) {
+          //  this.currentSpeed = createVector(runSpeed, 0);
+          //} else {
+          //  this.currentSpeed.x += playerIceRunAcceleration;
+          //  this.currentSpeed.x = min(runSpeed, this.currentSpeed.x);
+          //}
+          this.currentSpeed = createVector(runSpeed, 0);
         } else if (this.leftHeld && runAllowed) {
           this.hasFallen = false;
           this.isRunning = true;
           this.facingRight = false;
-          if (!levels[this.currentLevelNo].isIceLevel) {
-            this.currentSpeed = createVector(-runSpeed, 0);
-          } else {
-            this.currentSpeed.x -= playerIceRunAcceleration;
-            this.currentSpeed.x = max(0 - runSpeed, this.currentSpeed.x);
-          }
+          //if (!levels[this.currentLevelNo].isIceLevel) {
+          //  this.currentSpeed = createVector(-runSpeed, 0);
+          //} else {
+          //  this.currentSpeed.x -= playerIceRunAcceleration;
+          //  this.currentSpeed.x = max(0 - runSpeed, this.currentSpeed.x);
+          //}
+          this.currentSpeed = createVector(-runSpeed, 0);
         } else {
-          if (!levels[this.currentLevelNo].isIceLevel) {
-            this.currentSpeed = createVector(0, 0);
-          } else {
-            this.currentSpeed.y = 0;
-            if (this.IsMovingRight()) {
-              this.currentSpeed.x -= iceFrictionAcceleration;
-            } else {
-              this.currentSpeed.x += iceFrictionAcceleration;
-            }
-            if (abs(this.currentSpeed.x) <= iceFrictionAcceleration) {
-              this.currentSpeed.x = 0;
-            }
-          }
+          this.currentSpeed = createVector(0, 0);
+          //if (!levels[this.currentLevelNo].isIceLevel) {
+          //  this.currentSpeed = createVector(0, 0);
+          //} else {
+          //  this.currentSpeed.y = 0;
+          //  if (this.IsMovingRight()) {
+          //    this.currentSpeed.x -= iceFrictionAcceleration;
+          //  } else {
+          //    this.currentSpeed.x += iceFrictionAcceleration;
+          //  }
+          //  if (abs(this.currentSpeed.x) <= iceFrictionAcceleration) {
+          //    this.currentSpeed.x = 0;
+          //  }
+          //}
         }
       } else {
-        if (!levels[this.currentLevelNo].isIceLevel) {
-          this.currentSpeed = createVector(0, 0);
-        } else {
-          this.currentSpeed.y = 0;
-          if (this.IsMovingRight()) {
-            this.currentSpeed.x -= iceFrictionAcceleration;
-          } else {
-            this.currentSpeed.x += iceFrictionAcceleration;
-          }
-          if (abs(this.currentSpeed.x) <= iceFrictionAcceleration) {
-            this.currentSpeed.x = 0;
-          }
-        }
+        //if (!levels[this.currentLevelNo].isIceLevel) {
+        //  this.currentSpeed = createVector(0, 0);
+        //} else {
+        //  this.currentSpeed.y = 0;
+        //  if (this.IsMovingRight()) {
+        //    this.currentSpeed.x -= iceFrictionAcceleration;
+        //  } else {
+        //    this.currentSpeed.x += iceFrictionAcceleration;
+        //  }
+        //  if (abs(this.currentSpeed.x) <= iceFrictionAcceleration) {
+        //    this.currentSpeed.x = 0;
+        //  }
+        //}
+        this.currentSpeed = createVector(0, 0);
       }
     }
   }
@@ -1326,17 +1331,17 @@ class Player {
     // if moving down then weve landed
     this.isOnGround = true;
     // if were on an ice level then we slide instead
-    if (levels[this.currentLevelNo].isIceLevel) {
-      this.currentSpeed.y = 0;
-      if (this.IsMovingRight()) {
-        this.currentSpeed.x -= iceFrictionAcceleration;
-      } else {
-        this.currentSpeed.x += iceFrictionAcceleration;
-      }
-    } else {
-      this.currentSpeed = createVector(0, 0);
-    }
-
+    //if (levels[this.currentLevelNo].isIceLevel) {
+    //  this.currentSpeed.y = 0;
+    //  if (this.IsMovingRight()) {
+    //    this.currentSpeed.x -= iceFrictionAcceleration;
+    //  } else {
+    //    this.currentSpeed.x += iceFrictionAcceleration;
+    //  }
+    //} else {
+    //  this.currentSpeed = createVector(0, 0);
+    //}
+    this.currentSpeed = createVector(0, 0);
     this.isSlidding = false;
     this.hasBumped = false;
 
