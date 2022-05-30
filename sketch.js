@@ -143,6 +143,15 @@ function draw() {
     population.Show();
   } else if (!testingSinglePlayer && learningType === "q-learning") {
     levels[player.currentLevelNo].show();
+    if (player.currentLevelNo == 25) {
+      evolationSpeed = 2;
+    }
+    else if (player.currentLevelNo == 26) {
+      evolationSpeed = 1;
+    }
+    else {
+      evolationSpeed = 1000;
+    }
     for (let i = 0; i < evolationSpeed; i++) {
       player.Update();
     }
