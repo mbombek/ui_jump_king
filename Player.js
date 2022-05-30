@@ -358,9 +358,15 @@ class Player {
     // this.ApplyBlizzardForce();
     this.UpdatePlayerRun(currentLines);
     this.currentPos.add(this.currentSpeed);
-    if (this.currentPos.x < -20 || this.currentPos.x > 1200)  {
+    if ((this.currentPos.x < -20 || this.currentPos.x > 1200) && this.currentLevelNo < 32)  {
       this.ResetPlayer();
       console.log("RESETTED");
+      return;
+    }
+
+    if ((this.currentPos.x < -20 || this.currentPos.x > 1200) && this.currentLevelNo >= 32)  {
+      this.to32(32, 802, 615);
+      console.log("RESETTED 32");
       return;
     }
 
