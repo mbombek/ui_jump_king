@@ -119,18 +119,18 @@ class QBrain {
     }
 
     let reward = diff - exitdist + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
-    if (oldHeight == 5355 && newHeight == 5347) {
+    if (oldLevel * height - oldHeight == 5355 && newLevel * height - newHeight == 5347) {
       reward = 500;
-    } else if (oldHeight == 5347 && newHeight == 5355)  {
+    } else if (oldLevel * height - oldHeight == 5347 && newLevel * height - newHeight == 5355)  {
       reward = -500;
-    } else if (oldHeight == 4489 && newHeight == 4479)  {
+    } else if (oldLevel * height - oldHeight == 4489 && newLevel * height - newHeight == 4479)  {
       reward = 500;
-    } else if (oldHeight == 4479 && newHeight == 4489)  {
+    } else if (oldLevel * height - oldHeight == 4479 && newLevel * height - newHeight == 4489)  {
       reward = -500;
     }
 
     if (this.player.bestHeightReached == 5845 || this.player.bestHeightReached == 5285 || this.player.bestHeightReached == 7945)  {
-      console.log(oldHeight, newHeight);
+      console.log(oldLevel * height - oldHeight, newLevel * height - newHeight);
     }
 
     this.learner.add(oldState, newState, reward, action);
