@@ -313,6 +313,12 @@ class Player {
     this.ApplyBlizzardForce();
     this.UpdatePlayerRun(currentLines);
     this.currentPos.add(this.currentSpeed);
+    if (this.currentPos.x < -20 || this.currentPos.x > 1200)  {
+      this.ResetPlayer();
+      console.log("RESETTED");
+      return;
+    }
+
     this.previousSpeed = this.currentSpeed.copy();
 
     this.currentNumberOfCollisionChecks = 0;
