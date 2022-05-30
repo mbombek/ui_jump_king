@@ -25,7 +25,7 @@ class Coin {
     let playerMidPoint = playerToCheck.currentPos.copy();
     playerMidPoint.x += playerToCheck.width / 2;
     playerMidPoint.y += playerToCheck.height / 2;
-    return dist(playerMidPoint.x, playerMidPoint.y, this.x, this.y);
+    return dist(playerMidPoint.x, playerMidPoint.y / 2, this.x, this.y / 2);
   }
 
   show() {

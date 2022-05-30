@@ -43,7 +43,7 @@ let levelDrawn = false;
 let startingPlayerActions = 5;
 let increaseActionsByAmount = 2;
 let increaseActionsEveryXGenerations = 4;
-let evolationSpeed = 753;
+let evolationSpeed = 1;
 
 function preload() {
   backgroundImage = loadImage("images/levelImages/1.png");
@@ -230,6 +230,7 @@ cloneOfBestPlayer = null;
 function keyReleased() {
   switch (key) {
     case "B":
+      if (testingSinglePlayer || learningType == "q-learning") return;
       replayingBestPlayer = true;
       cloneOfBestPlayer =
         population.cloneOfBestPlayerFromPreviousGeneration.clone();
@@ -266,6 +267,10 @@ function keyReleased() {
         print(player.currentLevelNo);
       }
       break;
+    case "M":
+      player.currentLevelNo -= 1;
+      print(player.currentLevelNo);
+      break;
     case "D":
       if (creatingLines) {
         mousePos1 = null;
@@ -276,7 +281,7 @@ function keyReleased() {
       evolationSpeed = 1;
       break;
     case "G":
-      evolationSpeed = 753;
+      evolationSpeed = 400;
       break;
   }
 
@@ -288,12 +293,12 @@ function keyReleased() {
       player.rightHeld = false;
       break;
     case DOWN_ARROW:
-      evolationSpeed = constrain(evolationSpeed - 1, 0, 753);
+      evolationSpeed = constrain(evolationSpeed - 1, 0, 400);
       print(evolationSpeed);
 
       break;
     case UP_ARROW:
-      evolationSpeed = constrain(evolationSpeed + 1, 0, 753);
+      evolationSpeed = constrain(evolationSpeed + 1, 0, 400);
       print(evolationSpeed);
       break;
   }

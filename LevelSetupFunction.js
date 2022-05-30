@@ -1688,6 +1688,7 @@ function setupLevels() {
     levels[3].coins.push(new Coin(369, 508));
     levels[3].coins.push(new Coin(416, 181));
     levels[4].coins.push(new Coin(143, 160));
+    levels[4].coins.push(new Coin(862, 553));
     levels[5].coins.push(new Coin(298, 231));
     levels[5].coins.push(new Coin(801, 140));
     levels[5].coins.push(new Coin(1124, 152));
@@ -1698,6 +1699,7 @@ function setupLevels() {
     levels[8].coins.push(new Coin(550, 467));
     levels[8].coins.push(new Coin(1022, 192));
     levels[8].coins.push(new Coin(303, 466));
+    levels[12].coins.push(new Coin(259, 458));
     levels[16].coins.push(new Coin(650, 570));
     levels[16].coins.push(new Coin(195, 339));
     levels[17].coins.push(new Coin(722, 648));
@@ -1736,22 +1738,22 @@ function setupLevels() {
     // levels[37].coins.push(new Coin( 1005,181 , "progress" ));
     // levels[39].coins.push(new Coin( 365,187 , "progress" ));
 
-    // levels[0].exitcoin = new Coin(607, 0, "exit");
-    levels[1].exitcoin = new Coin(120, 0, "exit");
-    // levels[2].exitcoin = new Coin(180, 0, "exit");
-    levels[3].exitcoin = new Coin(418, 0, "exit");
-    levels[4].exitcoin = new Coin(140, 0, "exit");
-    levels[5].exitcoin = new Coin(1112, 0, "exit");
-    levels[6].exitcoin = new Coin(363, 0, "exit");
-    // levels[7].exitcoin = new Coin(47, 0, "exit");
-    levels[8].exitcoin = new Coin(640, 0, "exit");
-    levels[9].exitcoin = new Coin(1025, 0, "exit");
-    levels[10].exitcoin = new Coin(800, 0, "exit");
-    // levels[11].exitcoin = new Coin(780, 0, "exit");
-    levels[12].exitcoin = new Coin(1132, 0, "exit");
-    levels[13].exitcoin = new Coin(517, 0, "exit");
-    // levels[14].exitcoin = new Coin(525, 0, "exit");
-    // levels[15].exitcoin = new Coin(700, 0, "exit");
+    // levels[0].exitCoin = new Coin(607, 0, "exit");
+    levels[1].exitCoin = new Coin(120, 0, "exit");
+    // levels[2].exitCoin = new Coin(180, 0, "exit");
+    levels[3].exitCoin = new Coin(418, 0, "exit");
+    levels[4].exitCoin = new Coin(140, 0, "exit");
+    levels[5].exitCoin = new Coin(1112, 0, "exit");
+    levels[6].exitCoin = new Coin(363, 0, "exit");
+    // levels[7].exitCoin = new Coin(47, 0, "exit");
+    levels[8].exitCoin = new Coin(676, 0, "exit");
+    levels[9].exitCoin = new Coin(1025, 0, "exit");
+    levels[10].exitCoin = new Coin(800, 0, "exit");
+    // levels[11].exitCoin = new Coin(780, 0, "exit");
+    levels[12].exitCoin = new Coin(1132, 0, "exit");
+    levels[13].exitCoin = new Coin(517, 0, "exit");
+    // levels[14].exitCoin = new Coin(525, 0, "exit");
+    // levels[15].exitCoin = new Coin(700, 0, "exit");
 
     levels[1].hasProgressionCoins = true;
     levels[2].hasProgressionCoins = true;

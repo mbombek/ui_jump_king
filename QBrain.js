@@ -21,6 +21,7 @@ class QBrain {
     this.currentState = null;
     this.currentAction = null;
     this.numberOfCoins = 0;
+    this.exitCoinDist = 0;
   }
 
   getState() {
@@ -33,7 +34,7 @@ class QBrain {
   getRandomAction() {
     let isJump = false;
 
-    let jumpChance = 0.7;
+    let jumpChance = 0.3;
     let chanceOfFullJump = 0.2;
 
     if (random() > jumpChance) {
@@ -54,7 +55,7 @@ class QBrain {
   decodeAction(actionStr) {
     const elements = actionStr.split("_");
     let isJump = false;
-    let duration = 0.1;
+    let duration = 0.05;
     if (elements[0] == "1") {
       isJump = true;
     }
@@ -94,7 +95,7 @@ class QBrain {
     }
     const newState = this.getState();
 
-    const coinValue = 50;
+    const coinValue = 5000;
     const oldLevel = oldState.split("_")[0];
     const oldHeight = oldState.split("_")[2];
     const newLevel = newState.split("_")[0];
@@ -102,13 +103,25 @@ class QBrain {
 
     let diff = newLevel * height - newHeight - (oldLevel * height - oldHeight);
 
-    let exitdist = 0;
-    let currentExitCoin = levels[this.player.currentLevelNo].exitcoin;
+    let exitDist = 0;
+    let exitDistDiff = 0;
+    let currentExitCoin = levels[this.player.currentLevelNo].exitCoin;
     if (currentExitCoin) {
-      exitdist = Math.sqrt(currentExitCoin.exitDist(this.player));
+      exitDist = Math.sqrt(currentExitCoin.exitDist(this.player));
+      exitDistDiff = exitDist - this.exitCoinDist;
+      this.exitCoinDist = exitDist;
     }
 
-    const reward = diff - exitdist + coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
+    let currentRewardCoins = levels[this.player.currentLevelNo].coins.filter(
+      (item) => item.type == "reward"
+    );
+
+    if (currentRewardCoins) exitDistDiff = 0;
+
+    const reward =
+      diff +
+      exitDistDiff +
+      coinValue * (this.player.numberOfCoinsPickedUp - this.numberOfCoins);
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 
@@ -118,6 +131,6 @@ class QBrain {
         this.explorations[newLevel] -
         this.explorations[newLevel] * this.explorationDecay;
     }
-    console.log(oldState, newState, reward, action, this.explorations[newLevel]);
+    // console.log(oldState, newState, reward, action, this.explorations[newLevel]);
   }
 }
