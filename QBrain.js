@@ -111,6 +111,8 @@ class QBrain {
         5845: (71, 5355) -> (46, 5347)
         7945: (20, 7185) -> (45, 7173)
         7945: (45, 7173) -> (27, 7155)
+        15965: (36, 15273) -> (60, 15237)
+        15965: (4, 15277) -> (26, 15273)
     */
 
     let exitDist = 0;
@@ -151,6 +153,14 @@ class QBrain {
         reward = 500;
       } else if (oldLevel * height - oldHeight == 14343 && newLevel * height - newHeight == 14365 && newWidth > 100)  {
         reward = -500;
+      } else if (oldLevel * height - oldHeight == 15273 && newLevel * height - newHeight == 15237 && oldWidth < 45)  {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 15237 && newLevel * height - newHeight == 15273 && newWidth < 45)  {
+        reward = -500;
+      } else if (oldLevel * height - oldHeight == 15277 && newLevel * height - newHeight == 15273 && oldWidth < 15)  {
+        reward = 500;
+      } else if (oldLevel * height - oldHeight == 15273 && newLevel * height - newHeight == 15277 && newWidth < 15)  {
+        reward = -500;
       }
     // console.log(reward)
     /*
@@ -166,6 +176,9 @@ class QBrain {
       );
     }
     */
+    if (reward == 0)  {
+      reward = -1;
+    }
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 

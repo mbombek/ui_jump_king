@@ -17,7 +17,7 @@ let run2Image = null;
 let run3Image = null;
 let fallenImage = null;
 let fallImage = null;
-let showingLines = false;
+let showingLines = true;
 let showingCoins = true;
 let levelImages = [];
 
@@ -27,7 +27,7 @@ let playerPlaced = false;
 
 let testingSinglePlayer = false;
 let learningType = "q-learning"; // either q-learning or defaults to genetic alg
-let loadCachedQlearner = false;
+let loadCachedQlearner = true;
 
 let fallSound = null;
 let jumpSound = null;
@@ -113,6 +113,7 @@ function draw() {
     let x = ~~(player.currentPos.x / 10);
     let y = ~~(player.currentPos.y / 10);
     const lvl = player.currentLevelNo;
+    console.log(x, lvl * height - y);
   } else if (
     !testingSinglePlayer &&
     learningType === "genetic_algorithm" &&
@@ -174,6 +175,14 @@ function draw() {
     text("Actions: " + player.brain.numberOfActions, 30, 35);
     text("Best Height: " + player.bestHeightReached, 400, 35);
   }
+  /*
+  if (player.bestHeightReached == 15965)  {
+    testingSinglePlayer = true;
+    learningType = "manual";
+    mutePlayers = true;
+  }
+  */
+
 }
 
 let previousFrameRate = 60;
