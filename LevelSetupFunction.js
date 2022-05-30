@@ -521,7 +521,7 @@ function setupLevels() {
     tempLevel.lines.push(new Line(20, 200, 20, 60));
     tempLevel.lines.push(new Line(20, 60, 80, 0));
     tempLevel.lines.push(new Line(1180, 900, 1180, 600));
-    tempLevel.lines.push(new Line(1180, 600, 840, 600));
+    //tempLevel.lines.push(new Line(1180, 600, 840, 600));
     tempLevel.lines.push(new Line(840, 600, 840, 560));
     tempLevel.lines.push(new Line(840, 560, 960, 560));
     tempLevel.lines.push(new Line(960, 560, 960, 480));
