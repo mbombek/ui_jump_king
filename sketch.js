@@ -311,12 +311,12 @@ function keyReleased() {
       player.rightHeld = false;
       break;
     case DOWN_ARROW:
-      evolationSpeed = constrain(evolationSpeed - 1, 0, 400);
+      evolationSpeed = constrain(evolationSpeed - 1, 0, 1000);
       print(evolationSpeed);
 
       break;
     case UP_ARROW:
-      evolationSpeed = constrain(evolationSpeed + 1, 0, 400);
+      evolationSpeed = constrain(evolationSpeed + 1, 0, 1000);
       print(evolationSpeed);
       break;
   }

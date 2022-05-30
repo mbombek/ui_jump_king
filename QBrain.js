@@ -69,6 +69,10 @@ class QBrain {
 
   getNextAction() {
     const currentState = this.getState();
+    let x = this.player.currentPos.x;
+    if (x < 0 || x > 1150) {
+      this.player.ResetPlayer()
+    }
 
     let action = this.learner.bestAction(currentState);
     if (action) {
@@ -95,7 +99,7 @@ class QBrain {
     }
     const newState = this.getState();
 
-    const coinValue = 50;
+    const coinValue = 500;
     const oldLevel = oldState.split("_")[0];
     const oldHeight = oldState.split("_")[2];
     const oldWidth = oldState.split("_")[1];
@@ -162,23 +166,10 @@ class QBrain {
       } else if (oldLevel * height - oldHeight == 15273 && newLevel * height - newHeight == 15277 && newWidth < 15)  {
         reward = -500;
       }
-    // console.log(reward)
-    /*
-    if (
-      this.player.bestHeightReached == 5845 ||
-      this.player.bestHeightReached == 5285 ||
-      this.player.bestHeightReached == 7945
-    ) {
-      console.log(
-        oldLevel * height - oldHeight,
-        newLevel * height - newHeight,
-        reward
-      );
-    }
-    */
     if (reward == 0)  {
-      reward = -1;
+      reward = -100;
     }
+    // console.log(reward);
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
 
@@ -195,7 +186,6 @@ class QBrain {
     if (!loadCachedQlearner) return;
     this.learner.qValuesTable = cachedQtable;
     this.explorations = cachedExplorations;
-    console.log(cachedExplorations)
     let states = {};
     let statesList = [];
     for (const [state_name, val] of Object.entries(cachedStates)) {

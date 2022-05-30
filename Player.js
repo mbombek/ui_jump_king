@@ -129,9 +129,7 @@ class Player {
   constructor() {
     this.width = 50;
     this.height = 65;
-
-    // this.currentPos = createVector(width / 2, height - 200); // this is the top left corner of the hitbox
-    this.currentPos = createVector(width / 2, height - 200); // this is the top left corner of the hitbox
+    this.currentPos = createVector(width / 2, height - 200);
     this.currentSpeed = createVector(0, 0);
     this.isOnGround = false;
 
@@ -306,11 +304,7 @@ class Player {
   }
 
   Update() {
-    // if (this.playersDead)
-    //   //|| this.hasFinishedInstructions)
-    //   return;
     let currentLines = levels[this.currentLevelNo].lines;
-
     if (!testingSinglePlayer && !this.hasFinishedInstructions) {
       this.UpdateAIAction();
     }
