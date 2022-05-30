@@ -23,10 +23,11 @@ class QBrain {
     this.numberOfCoins = 0;
   }
 
-  getState() {
+  getState(coin) {
     const x = ~~(this.player.currentPos.x / 10);
     const y = ~~(this.player.currentPos.y / 10);
     const lvl = this.player.currentLevelNo;
+    const exitDist = this.player.exitDist(coin)
     return `${lvl}_${x}_${y}`;
   }
 
@@ -87,13 +88,13 @@ class QBrain {
   }
 
   learn() {
+    
     const action = this.currentAction;
     const oldState = this.currentState;
     if (!oldState) {
       return;
     }
-    const newState = this.getState();
-
+    
     const coinValue = 50;
     const oldLevel = oldState.split("_")[0];
     const oldHeight = oldState.split("_")[2];
@@ -111,7 +112,7 @@ class QBrain {
     */
 
     let exitdist = 0;
-    let currentExitCoin = levels[this.player.currentLevelNo].exitcoin;
+    let currentExitCoin = levels[this.player.currentLevelNo].exitCoin;
     if (currentExitCoin) {
       exitdist = Math.sqrt(currentExitCoin.exitDist(this.player));
     }
@@ -134,10 +135,14 @@ class QBrain {
       reward = 500;
     } else if (oldLevel * height - oldHeight == 7155 && newLevel * height - newHeight == 7173)  {
       reward = -500;
+    } else if (oldLevel * height - oldHeight == 7185 && newLevel * height - newHeight == 7155)  {
+      reward = 500;
+    } else if (oldLevel * height - oldHeight == 7155 && newLevel * height - newHeight == 7185)  {
+      reward = -500;
     }
     console.log(reward)
     if (this.player.bestHeightReached == 5845 || this.player.bestHeightReached == 5285 || this.player.bestHeightReached == 7945)  {
-      console.log(oldLevel * height - oldHeight, newLevel * height - newHeight);
+      console.log(oldLevel * height - oldHeight, newLevel * height - newHeight, reward);
     }
 
     this.learner.add(oldState, newState, reward, action);

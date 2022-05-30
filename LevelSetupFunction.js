@@ -1744,7 +1744,7 @@ function setupLevels() {
     levels[5].exitCoin = new Coin(1112, 0, "exit");
     levels[6].exitCoin = new Coin(363, 0, "exit");
     // levels[7].exitcoin = new Coin(47, 0, "exit");
-    levels[8].exitCoin = new Coin(640, 0, "exit");
+    levels[8].exitCoin = new Coin(740, 0, "exit");
     levels[9].exitCoin = new Coin(1025, 0, "exit");
     levels[10].exitCoin = new Coin(800, 0, "exit");
     // levels[11].exitcoin = new Coin(780, 0, "exit");
