@@ -114,7 +114,7 @@ function draw() {
     let x = ~~(player.currentPos.x / 10);
     let y = ~~(player.currentPos.y / 10);
     const lvl = player.currentLevelNo;
-    console.log(x, lvl * height - y)
+    console.log(x, lvl * height - y);
   } else if (
     !testingSinglePlayer &&
     learningType === "genetic_algorithm" &&
@@ -284,12 +284,16 @@ function keyReleased() {
       break;
     case "L":
       player.brain.saveQlearner();
-      console.log("QTABLE SAVED")
+      console.log("QTABLE SAVED");
       break;
     case "P":
       testingSinglePlayer = true;
       learningType = "manual";
       mutePlayers = true;
+      break;
+    case "H":
+      console.log(player.brain.learner.qValuesTable);
+      evolationSpeed = 0;
       break;
   }
 
