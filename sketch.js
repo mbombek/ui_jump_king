@@ -1,5 +1,3 @@
-// const QLearner = require("./QLearner");
-
 let width = 0;
 let height = 0;
 let canvas = null;
@@ -43,7 +41,7 @@ let levelDrawn = false;
 let startingPlayerActions = 5;
 let increaseActionsByAmount = 2;
 let increaseActionsEveryXGenerations = 4;
-let evolationSpeed = 753;
+let evolationSpeed = 400;
 
 function preload() {
   backgroundImage = loadImage("images/levelImages/1.png");
@@ -305,12 +303,12 @@ function keyReleased() {
       player.rightHeld = false;
       break;
     case DOWN_ARROW:
-      evolationSpeed = constrain(evolationSpeed - 1, 0, 753);
+      evolationSpeed = constrain(evolationSpeed - 1, 0, 400);
       print(evolationSpeed);
 
       break;
     case UP_ARROW:
-      evolationSpeed = constrain(evolationSpeed + 1, 0, 753);
+      evolationSpeed = constrain(evolationSpeed + 1, 0, 400);
       print(evolationSpeed);
       break;
   }
