@@ -9,7 +9,7 @@ class Coin {
 
   collidesWithPlayer(playerToCheck) {
     if (this.type == "exit") return false;
-    let playerMidPoint = playerToCheck.currentPos.copy();
+    let playerMidPoint = playerToCheck.currentPos.copy_t();
     playerMidPoint.x += playerToCheck.width / 2;
     playerMidPoint.y += playerToCheck.height / 2;
     if (
@@ -22,7 +22,7 @@ class Coin {
   }
 
   exitDist(playerToCheck) {
-    let playerMidPoint = playerToCheck.currentPos.copy();
+    let playerMidPoint = playerToCheck.currentPos.copy_t();
     playerMidPoint.x += playerToCheck.width / 2;
     playerMidPoint.y += playerToCheck.height / 2;
     return dist(playerMidPoint.x, playerMidPoint.y, this.x, this.y);

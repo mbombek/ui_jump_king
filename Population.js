@@ -5,7 +5,7 @@ class Population {
     this.popSize = size;
     this.players = [];
     for (let i = 0; i < size; i++) {
-      this.players.push(new Player());
+      this.players.push(new Player("gen"));
     }
 
     this.showingFail = false;
@@ -106,10 +106,13 @@ class Population {
 
   AllPlayersFinished() {
     for (let i = 0; i < this.players.length; i++) {
+      // console.log(this.players[i].learningMode);
       if (!this.players[i].hasFinishedInstructions) {
+        //console.log("ITS FALSE")
         return false;
       }
     }
+    //console.log("ITS TRUE")
     return true;
   }
 
@@ -117,6 +120,7 @@ class Population {
     let nextGen = [];
     this.SetBestPlayer();
     this.CalculateFitnessSum();
+    console.log("here");
 
     this.cloneOfBestPlayerFromPreviousGeneration =
       this.players[this.bestPlayerIndex].clone();
@@ -152,7 +156,7 @@ class Population {
         this.players[i].loadStartOfBestLevelPlayerState();
       }
     }
-
+    console.log("ova here");
     this.gen++;
   }
 

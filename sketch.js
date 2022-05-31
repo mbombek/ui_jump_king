@@ -17,8 +17,8 @@ let run2Image = null;
 let run3Image = null;
 let fallenImage = null;
 let fallImage = null;
-let showingLines = true;
-let showingCoins = true;
+let showingLines = false;
+let showingCoins = false;
 let levelImages = [];
 
 let placingPlayer = false;
@@ -26,7 +26,8 @@ let placingCoins = false;
 let playerPlaced = false;
 
 let testingSinglePlayer = false;
-let learningType = "q-learning"; // either q-learning or defaults to genetic alg
+//let learningType = "q-learning"; // either q-learning or defaults to genetic alg
+let learningType = "genetic_algorithm";
 let loadCachedQlearner = true;
 
 let fallSound = null;
@@ -106,6 +107,7 @@ function draw() {
   background(10);
   push();
   translate(0, 50);
+  // .log(learningType);
   if (testingSinglePlayer && learningType === "manual") {
     levels[player.currentLevelNo].show();
     player.Update();

@@ -20,11 +20,11 @@ class Level {
       }
     }
     if (showingCoins) {
-      //if (this.exitCoin) this.exitCoin.show();
+      if (this.exitCoin) this.exitCoin.show();
       if (this.endCoin) this.endCoin.show();
-      //for (let c of this.coins) {
-      //  c.show();
-      //}
+      for (let c of this.coins) {
+        c.show();
+      }
     }
 
     pop();

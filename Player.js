@@ -43,8 +43,8 @@ class PlayerState {
   }
 
   getStateFromPlayer(player) {
-    this.currentPos = player.currentPos.copy();
-    this.currentSpeed = player.currentSpeed.copy();
+    this.currentPos = player.currentPos.copy_t();
+    this.currentSpeed = player.currentSpeed.copy_t();
     this.isOnGround = player.isOnGround;
 
     this.blizzardForce = player.blizzardForce;
@@ -68,8 +68,8 @@ class PlayerState {
   }
 
   loadStateToPlayer(player) {
-    player.currentPos = this.currentPos.copy();
-    player.currentSpeed = this.currentSpeed.copy();
+    player.currentPos = this.currentPos.copy_t();
+    player.currentSpeed = this.currentSpeed.copy_t();
     player.isOnGround = this.isOnGround;
 
     player.blizzardForce = this.blizzardForce;
@@ -99,8 +99,8 @@ class PlayerState {
 
   clone() {
     let clone = new PlayerState();
-    clone.currentPos = this.currentPos.copy();
-    clone.currentSpeed = this.currentSpeed.copy();
+    clone.currentPos = this.currentPos.copy_t();
+    clone.currentSpeed = this.currentSpeed.copy_t();
     clone.isOnGround = this.isOnGround;
 
     clone.blizzardForce = this.blizzardForce;
@@ -126,7 +126,7 @@ class PlayerState {
 }
 
 class Player {
-  constructor() {
+  constructor(learningMode = "q") {
     this.width = 50;
     this.height = 65;
     this.currentPos = createVector(width / 2, height - 200);
@@ -215,7 +215,7 @@ class Player {
     this.bestHeightReached = 0;
     this.bestLevelReached = 0;
     this.reachedHeightAtStepNo = 0;
-
+    this.learningMode = learningMode;
     this.fitness = 0;
     this.hasFinishedInstructions = false;
     this.fellToPreviousLevel = false;
@@ -290,6 +290,7 @@ class Player {
       this.playerStateAtStartOfBestLevel.clone();
     clone.brain.parentReachedBestLevelAtActionNo =
       this.bestLevelReachedOnActionNo;
+    clone.learningMode = this.learningMode;
     return clone;
   }
 
@@ -379,7 +380,7 @@ class Player {
       return;
     }
 
-    this.previousSpeed = this.currentSpeed.copy();
+    this.previousSpeed = this.currentSpeed.copy_t();
 
     this.currentNumberOfCollisionChecks = 0;
     this.CheckCollisions(currentLines);
@@ -533,9 +534,9 @@ class Player {
 
       if (chosenLine.diagonalCollisionInfo.collisionPoints.length === 2) {
         let midpoint =
-          chosenLine.diagonalCollisionInfo.collisionPoints[0].copy();
+          chosenLine.diagonalCollisionInfo.collisionPoints[0].copy_t();
         midpoint.add(
-          chosenLine.diagonalCollisionInfo.collisionPoints[1].copy()
+          chosenLine.diagonalCollisionInfo.collisionPoints[1].copy_t()
         );
         midpoint.mult(0.5);
 
@@ -549,22 +550,22 @@ class Player {
 
         if (top && left) {
           // print("t and l")
-          playerCornerPos = this.currentPos.copy();
+          playerCornerPos = this.currentPos.copy_t();
         }
         if (top && right) {
           // print("t and r")
-          playerCornerPos = this.currentPos.copy();
+          playerCornerPos = this.currentPos.copy_t();
           playerCornerPos.x += this.width;
         }
         if (bottom && left) {
           // print("b and l")
-          playerCornerPos = this.currentPos.copy();
+          playerCornerPos = this.currentPos.copy_t();
           playerCornerPos.y += this.height;
           this.sliddingRight = true;
         }
         if (bottom && right) {
           // print("b and r")
-          playerCornerPos = this.currentPos.copy();
+          playerCornerPos = this.currentPos.copy_t();
           playerCornerPos.y += this.height;
           playerCornerPos.x += this.width;
           this.sliddingRight = false;
@@ -575,7 +576,7 @@ class Player {
         if (playerCornerPos === null) {
           print("fuck");
           print(left, right, top, bottom);
-          playerCornerPos = this.currentPos.copy();
+          playerCornerPos = this.currentPos.copy_t();
 
           if (this.IsMovingDown()) {
             playerCornerPos.y += this.height;
@@ -658,7 +659,9 @@ class Player {
       // print(chosenLine)
       this.currentNumberOfCollisionChecks += 1;
       if (this.currentNumberOfCollisionChecks > this.maxCollisionChecks) {
-        // this.hasFinishedInstructions = true;
+        if (this.learningMode == "gen") {
+          this.hasFinishedInstructions = true;
+        }
         this.playersDead = true;
       } else {
         this.CheckCollisions(currentLines);
@@ -830,12 +833,12 @@ class Player {
       //wait there might be hold on
       // ok jsut check all of them
 
-      let tl = this.currentPos.copy();
-      let tr = tl.copy();
+      let tl = this.currentPos.copy_t();
+      let tr = tl.copy_t();
       tr.x += this.width;
-      let bl = tl.copy();
+      let bl = tl.copy_t();
       bl.y += this.height - 1;
-      let br = bl.copy();
+      let br = bl.copy_t();
       br.x += this.width;
 
       let leftCollision = AreLinesColliding(
@@ -1147,8 +1150,8 @@ class Player {
           // if we get the midpoint of the 2 intersection points then we gucci
           // if there is only 1 intersection point then just treat it as a wall/ roof
           if (l.diagonalCollisionInfo.collisionPoints.length === 2) {
-            let midpoint = l.diagonalCollisionInfo.collisionPoints[0].copy();
-            midpoint.add(l.diagonalCollisionInfo.collisionPoints[1].copy());
+            let midpoint = l.diagonalCollisionInfo.collisionPoints[0].copy_t();
+            midpoint.add(l.diagonalCollisionInfo.collisionPoints[1].copy_t());
             midpoint.mult(0.5);
 
             let left = l.diagonalCollisionInfo.leftSideOfPlayerCollided;
@@ -1158,18 +1161,18 @@ class Player {
 
             let playerCornerPos = null;
             if (top && left) {
-              playerCornerPos = this.currentPos.copy();
+              playerCornerPos = this.currentPos.copy_t();
             }
             if (top && right) {
-              playerCornerPos = this.currentPos.copy();
+              playerCornerPos = this.currentPos.copy_t();
               playerCornerPos.x += this.width;
             }
             if (bottom && left) {
-              playerCornerPos = this.currentPos.copy();
+              playerCornerPos = this.currentPos.copy_t();
               playerCornerPos.y += this.height;
             }
             if (bottom && right) {
-              playerCornerPos = this.currentPos.copy();
+              playerCornerPos = this.currentPos.copy_t();
               playerCornerPos.y += this.height;
               playerCornerPos.x += this.width;
             }
@@ -1177,7 +1180,7 @@ class Player {
             if (playerCornerPos === null) {
               print("fuck");
               print(left, right, top, bottom);
-              playerCornerPos = this.currentPos.copy();
+              playerCornerPos = this.currentPos.copy_t();
 
               if (this.IsMovingDown()) {
                 playerCornerPos.y += this.height;
@@ -1262,7 +1265,9 @@ class Player {
         // print("fuck me hes goin under")
         this.currentLevelNo = 1; //lol fixed
         this.playersDead = true;
-        // this.hasFinishedInstructions = true;
+        if (this.learningMode == "gen") {
+          this.hasFinishedInstructions = true;
+        }
       }
       this.currentLevelNo -= 1;
       this.currentPos.y -= height;
@@ -1273,7 +1278,9 @@ class Player {
       ) {
         this.fellToPreviousLevel = true;
         this.fellOnActionNo = this.brain.currentInstructionNumber;
-        // this.hasFinishedInstructions = true;
+        if (this.learningMode == "gen") {
+          this.hasFinishedInstructions = true;
+        }
       }
     }
   }
@@ -1295,7 +1302,9 @@ class Player {
       }
       this.currentAction = this.brain.getNextAction();
       if (this.currentAction === null) {
-        // this.hasFinishedInstructions = true;
+        if (this.learningMode == "gen") {
+          this.hasFinishedInstructions = true;
+        } 
         return;
       }
       this.StartCurrentAction();
@@ -1392,7 +1401,9 @@ class Player {
     ) {
       this.fellToPreviousLevel = true;
       this.fellOnActionNo = this.brain.currentInstructionNumber;
-    //   this.hasFinishedInstructions = true;
+      if (this.learningMode == "gen") {
+        this.hasFinishedInstructions = true;
+      }
     }
 
     if (!mutePlayers || testingSinglePlayer) {
