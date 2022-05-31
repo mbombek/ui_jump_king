@@ -170,8 +170,17 @@ class QBrain {
       reward = -10;
     }
     // console.log(reward);
+    if (this.player.endCoinPicked)  {
+      reward = 1000000000;
+      this.learner.add(oldState, newState, reward, action);
+      console.log("ENDING ACTION ADDED")
+      this.learner.learn(100);
+      this.player.ResetPlayer(true);
+      return;
+    }
     this.learner.add(oldState, newState, reward, action);
     this.learner.learn(100);
+
 
     this.numberOfCoins = this.player.numberOfCoinsPickedUp;
     if (this.explorations[newLevel] > this.minExploration) {

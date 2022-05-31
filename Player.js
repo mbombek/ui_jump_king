@@ -225,6 +225,7 @@ class Player {
 
     this.parentReachedBestLevelAtActionNo = 0;
     this.numberOfCoinsPickedUp = 0;
+    this.endCoinPicked = false;
     this.coinsPickedUpIndexes = [];
 
     this.maxCollisionChecks = 20;
@@ -233,7 +234,7 @@ class Player {
     this.progressionCoinPickedUp = false;
   }
 
-  ResetPlayer() {
+  ResetPlayer(eraseBest = false) {
     this.currentPos = createVector(width / 2, height - 200); // this is the top left corner of the hitbox
     this.currentSpeed = createVector(0, 0);
     this.isOnGround = false;
@@ -272,11 +273,14 @@ class Player {
 
     this.playersDead = false;
     this.previousSpeed = createVector(0, 0);
-    this.bestHeightReached = 0;
+    if (eraseBest)  {
+      this.bestHeightReached = 0;
+    }
     this.reachedHeightAtStepNo = 0;
 
     this.fitness = 0;
     this.hasFinishedInstructions = false;
+    this.endCoinPicked = false;
   }
 
   clone() {
@@ -351,6 +355,11 @@ class Player {
   Update() {
     let currentLines = levels[this.currentLevelNo].lines;
     if (!testingSinglePlayer && !this.hasFinishedInstructions) {
+      //if (this.endCoinPicked) {
+      //  this.ResetPlayer(true);
+      //  console.log("FINISH RESETTED");
+      //  return;
+      //}
       this.UpdateAIAction();
     }
     this.UpdatePlayerSlide(currentLines);
@@ -359,7 +368,7 @@ class Player {
     this.UpdatePlayerRun(currentLines);
     this.currentPos.add(this.currentSpeed);
     if ((this.currentPos.x < -20 || this.currentPos.x > 1200) && this.currentLevelNo < 32)  {
-      this.ResetPlayer();
+      this.ResetPlayer(false);
       console.log("RESETTED");
       return;
     }
@@ -1280,6 +1289,9 @@ class Player {
     if (this.isOnGround && !this.actionStarted) {
       if (learningType === "q-learning") {
         this.brain.learn();
+        if (this.endCoinPicked) {
+          return;
+        }
       }
       this.currentAction = this.brain.getNextAction();
       if (this.currentAction === null) {
@@ -1410,7 +1422,7 @@ class Player {
             }
           } else if (currentLevel.coins[i].type == "end") {
             console.log("DONE DID IT")
-            this.ResetPlayer()
+            this.endCoinPicked = true;
           } else {
             this.coinsPickedUpIndexes.push(i);
             this.numberOfCoinsPickedUp += 0; // dont increase coins picked up

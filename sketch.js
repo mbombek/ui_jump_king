@@ -113,8 +113,8 @@ function draw() {
     let x = ~~(player.currentPos.x / 10);
     let y = ~~(player.currentPos.y / 10);
     const lvl = player.currentLevelNo;
-    console.log(x, lvl * height - y);
-    console.log(player.currentPos.x, player.currentPos.y);
+    //console.log(x, lvl * height - y);
+    //console.log(player.currentPos.x, player.currentPos.y);
   } else if (
     !testingSinglePlayer &&
     learningType === "genetic_algorithm" &&

@@ -34,6 +34,8 @@ class Coin {
       fill(255, 150, 0);
     } else if (this.type == "exit") {
       fill(55, 50, 255);
+    } else if (this.type == "end") {
+      fill(255, 0, 0);
     } else {
       fill(0, 200, 0, 100);
     }
