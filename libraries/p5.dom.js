@@ -1870,8 +1870,8 @@
       p5.Renderer2D.prototype.set.call(this, x, y, imgOrCol);
     }
   };
-  p5.MediaElement.prototype.copy = function(){
-    p5.Renderer2D.prototype.copy.apply(this, arguments);
+  p5.MediaElement.prototype.copy_t = function(){
+    p5.Renderer2D.prototype.copy_t.apply(this, arguments);
   };
   p5.MediaElement.prototype.mask = function(){
     this.loadPixels();

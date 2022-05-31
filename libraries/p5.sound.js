@@ -69,10 +69,10 @@
   sndcore = function () {
     'use strict';
     /* AudioContext Monkeypatch
-     Copyright 2013 Chris Wilson
+     copy_tright 2013 Chris Wilson
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
-     You may obtain a copy of the License at
+     You may obtain a copy_t of the License at
          http://www.apache.org/licenses/LICENSE-2.0
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
@@ -1787,7 +1787,7 @@
     // script processor node with an empty buffer to help
     // keep a sample-accurate position in playback buffer.
     // Inspired by Chinmay Pendharkar's technique for Sonoport --> http://bit.ly/1HwdCsV
-    // Copyright [2015] [Sonoport (Asia) Pte. Ltd.],
+    // copy_tright [2015] [Sonoport (Asia) Pte. Ltd.],
     // Licensed under the Apache License http://apache.org/licenses/LICENSE-2.0
     ////////////////////////////////////////////////////////////////////////////////////
     // initialize counterNode, set its initial buffer and playbackRate

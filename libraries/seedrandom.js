@@ -77,11 +77,11 @@
         if (state) {
           // Load the arc4 state from the given state if it has an S array.
           if (state.S) {
-            copy(state, arc4);
+            copy_t(state, arc4);
           }
           // Only provide the .state method if requested via options.state.
           prng.state = function () {
-            return copy(arc4, {});
+            return copy_t(arc4, {});
           };
         }
 
@@ -159,10 +159,10 @@
   }
 
   //
-  // copy()
+  // copy_t()
   // Copies internal state of ARC4 to or from a plain object.
   //
-  function copy(f, t) {
+  function copy_t(f, t) {
     t.i = f.i;
     t.j = f.j;
     t.S = f.S.slice();

@@ -5,7 +5,7 @@
 (function (process,global){
 /*!
  * @overview es6-promise - a tiny implementation of Promises/A+.
- * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+ * @copy_tright copy_tright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
  * @license   Licensed under MIT license
  *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
  * @version   4.0.5
@@ -1322,7 +1322,7 @@ var cffStandardStrings = [
     'cedilla', 'hungarumlaut', 'ogonek', 'caron', 'emdash', 'AE', 'ordfeminine', 'Lslash', 'Oslash', 'OE',
     'ordmasculine', 'ae', 'dotlessi', 'lslash', 'oslash', 'oe', 'germandbls', 'onesuperior', 'logicalnot', 'mu',
     'trademark', 'Eth', 'onehalf', 'plusminus', 'Thorn', 'onequarter', 'divide', 'brokenbar', 'degree', 'thorn',
-    'threequarters', 'twosuperior', 'registered', 'minus', 'eth', 'multiply', 'threesuperior', 'copyright',
+    'threequarters', 'twosuperior', 'registered', 'minus', 'eth', 'multiply', 'threesuperior', 'copy_tright',
     'Aacute', 'Acircumflex', 'Adieresis', 'Agrave', 'Aring', 'Atilde', 'Ccedilla', 'Eacute', 'Ecircumflex',
     'Edieresis', 'Egrave', 'Iacute', 'Icircumflex', 'Idieresis', 'Igrave', 'Ntilde', 'Oacute', 'Ocircumflex',
     'Odieresis', 'Ograve', 'Otilde', 'Scaron', 'Uacute', 'Ucircumflex', 'Udieresis', 'Ugrave', 'Yacute',
@@ -1411,7 +1411,7 @@ var standardNames = [
     'acircumflex', 'adieresis', 'atilde', 'aring', 'ccedilla', 'eacute', 'egrave', 'ecircumflex', 'edieresis',
     'iacute', 'igrave', 'icircumflex', 'idieresis', 'ntilde', 'oacute', 'ograve', 'ocircumflex', 'odieresis',
     'otilde', 'uacute', 'ugrave', 'ucircumflex', 'udieresis', 'dagger', 'degree', 'cent', 'sterling', 'section',
-    'bullet', 'paragraph', 'germandbls', 'registered', 'copyright', 'trademark', 'acute', 'dieresis', 'notequal',
+    'bullet', 'paragraph', 'germandbls', 'registered', 'copy_tright', 'trademark', 'acute', 'dieresis', 'notequal',
     'AE', 'Oslash', 'infinity', 'plusminus', 'lessequal', 'greaterequal', 'yen', 'mu', 'partialdiff', 'summation',
     'product', 'pi', 'integral', 'ordfeminine', 'ordmasculine', 'Omega', 'ae', 'oslash', 'questiondown',
     'exclamdown', 'logicalnot', 'radical', 'florin', 'approxequal', 'Delta', 'guillemotleft', 'guillemotright',
@@ -1567,7 +1567,7 @@ function Font(options) {
         licenseURL: {en: options.licenseURL || ' '},
         version: {en: options.version || 'Version 0.1'},
         description: {en: options.description || ' '},
-        copyright: {en: options.copyright || ' '},
+        copy_tright: {en: options.copy_tright || ' '},
         trademark: {en: options.trademark || ' '}
     };
     this.unitsPerEm = options.unitsPerEm || 1000;
@@ -1773,7 +1773,7 @@ Font.prototype.validate = function() {
     assertNamePresent('fontFamily');
     assertNamePresent('weightName');
     assertNamePresent('manufacturer');
-    assertNamePresent('copyright');
+    assertNamePresent('copy_tright');
     assertNamePresent('version');
 
     // Dimension information
@@ -3128,7 +3128,7 @@ function parseCFFHeader(data, start) {
 var TOP_DICT_META = [
     {name: 'version', op: 0, type: 'SID'},
     {name: 'notice', op: 1, type: 'SID'},
-    {name: 'copyright', op: 1200, type: 'SID'},
+    {name: 'copy_tright', op: 1200, type: 'SID'},
     {name: 'fullName', op: 2, type: 'SID'},
     {name: 'familyName', op: 3, type: 'SID'},
     {name: 'weight', op: 4, type: 'SID'},
@@ -5237,7 +5237,7 @@ var table = _dereq_('../table');
 
 // NameIDs for the name table.
 var nameTableNames = [
-    'copyright',              // 0
+    'copy_tright',              // 0
     'fontFamily',             // 1
     'fontSubfamily',          // 2
     'uniqueID',               // 3
@@ -11192,7 +11192,7 @@ module.exports = {
   EXCLUSION: 'exclusion',
   MULTIPLY: 'multiply',
   SCREEN: 'screen',
-  REPLACE: 'copy',
+  REPLACE: 'copy_t',
   OVERLAY: 'overlay',
   HARD_LIGHT: 'hard-light',
   SOFT_LIGHT: 'soft-light',
@@ -14664,7 +14664,7 @@ p5.Renderer2D.prototype.blend = function() {
   var currBlend = this.drawingContext.globalCompositeOperation;
   var blendMode = arguments[arguments.length - 1];
 
-  var copyArgs = Array.prototype.slice.call(
+  var copy_tArgs = Array.prototype.slice.call(
     arguments,
     0,
     arguments.length - 1
@@ -14672,14 +14672,14 @@ p5.Renderer2D.prototype.blend = function() {
 
   this.drawingContext.globalCompositeOperation = blendMode;
   if (this._pInst) {
-    this._pInst.copy.apply(this._pInst, copyArgs);
+    this._pInst.copy_t.apply(this._pInst, copy_tArgs);
   } else {
-    this.copy.apply(this, copyArgs);
+    this.copy_t.apply(this, copy_tArgs);
   }
   this.drawingContext.globalCompositeOperation = currBlend;
 };
 
-p5.Renderer2D.prototype.copy = function () {
+p5.Renderer2D.prototype.copy_t = function () {
   var srcImage, sx, sy, sw, sh, dx, dy, dw, dh;
   if (arguments.length === 9) {
     srcImage = arguments[0];
@@ -14704,10 +14704,10 @@ p5.Renderer2D.prototype.copy = function () {
   } else {
     throw new Error('Signature not supported');
   }
-  p5.Renderer2D._copyHelper(srcImage, sx, sy, sw, sh, dx, dy, dw, dh);
+  p5.Renderer2D._copy_tHelper(srcImage, sx, sy, sw, sh, dx, dy, dw, dh);
 };
 
-p5.Renderer2D._copyHelper =
+p5.Renderer2D._copy_tHelper =
 function (srcImage, sx, sy, sw, sh, dx, dy, dw, dh) {
   srcImage.loadPixels();
   var s = srcImage.canvas.width / srcImage.width;
@@ -16184,7 +16184,7 @@ window.performance.now = (function(){
 
 /**
  * shim for Uint8ClampedArray.slice
- * (allows arrayCopy to work with pixels[])
+ * (allows arraycopy_t to work with pixels[])
  * with thanks to http://halfpapstudios.com/blog/tag/html5-canvas/
  * Enumerable set to false to protect for...in from
  * Uint8ClampedArray.prototype pollution.
@@ -17385,7 +17385,7 @@ p5.prototype.curveVertex = function(x,y) {
  *
  */
 p5.prototype.endContour = function() {
-  var vert = contourVertices[0].slice(); // copy all data
+  var vert = contourVertices[0].slice(); // copy_t all data
   vert.isVert = contourVertices[0].isVert;
   vert.moveTo = false;
   contourVertices.push(vert);
@@ -19597,7 +19597,7 @@ module.exports = p5;
  *
  * This module is basically a collection of functions stored in an object
  * as opposed to modules. The functions are destructive, modifying
- * the passed in canvas rather than creating a copy.
+ * the passed in canvas rather than creating a copy_t.
  *
  * Generally speaking users of this module will use the Filters.apply method
  * on a canvas to create an effect.
@@ -21310,7 +21310,7 @@ p5.Image.prototype.get = function(x, y, w, h){
  * @param {Number}              x x-coordinate of the pixel
  * @param {Number}              y y-coordinate of the pixel
  * @param {Number|Array|Object}   a grayscale value | pixel array |
- *                                a p5.Color | image to copy
+ *                                a p5.Color | image to copy_t
  * @example
  * <div>
  * <code>
@@ -21367,10 +21367,10 @@ p5.Image.prototype.set = function(x, y, imgOrCol){
  */
 p5.Image.prototype.resize = function(width, height){
 
-  // Copy contents to a temporary canvas, resize the original
-  // and then copy back.
+  // copy_t contents to a temporary canvas, resize the original
+  // and then copy_t back.
   //
-  // There is a faster approach that involves just one copy and swapping the
+  // There is a faster approach that involves just one copy_t and swapping the
   // this.canvas reference. We could switch to that approach if (as i think
   // is the case) there an expectation that the user would not hold a
   // reference to the backing canvas of a p5.Image. But since we do not
@@ -21403,7 +21403,7 @@ p5.Image.prototype.resize = function(width, height){
   this.canvas.width = this.width = width;
   this.canvas.height = this.height = height;
 
-  //Copy the image back
+  //copy_t the image back
 
   this.drawingContext.drawImage(tempCanvas,
     0, 0, width, height,
@@ -21422,7 +21422,7 @@ p5.Image.prototype.resize = function(width, height){
  * automatically resize source pixels to fit the specified
  * target region.
  *
- * @method copy
+ * @method copy_t
  * @param  {p5.Image|undefined} srcImage source image
  * @param  {Integer} sx X coordinate of the source's upper left corner
  * @param  {Integer} sy Y coordinate of the source's upper left corner
@@ -21447,7 +21447,7 @@ p5.Image.prototype.resize = function(width, height){
  * function setup() {
  *   x = bricks.width/2;
  *   y = bricks.height/2;
- *   photo.copy(bricks, 0, 0, x, y, 0, 0, x, y);
+ *   photo.copy_t(bricks, 0, 0, x, y, 0, 0, x, y);
  *   image(photo, 0, 0);
  * }
  * </code></div>
@@ -21456,8 +21456,8 @@ p5.Image.prototype.resize = function(width, height){
  * image of rocky mountains and smaller image on top of bricks at top left
  *
  */
-p5.Image.prototype.copy = function () {
-  p5.prototype.copy.apply(this, arguments);
+p5.Image.prototype.copy_t = function () {
+  p5.prototype.copy_t.apply(this, arguments);
 };
 
 /**
@@ -21505,7 +21505,7 @@ p5.Image.prototype.mask = function(p5Image) {
     scaleFactor = p5Image._pInst._pixelDensity;
   }
 
-  var copyArgs = [
+  var copy_tArgs = [
     p5Image,
     0,
     0,
@@ -21518,7 +21518,7 @@ p5.Image.prototype.mask = function(p5Image) {
   ];
 
   this.drawingContext.globalCompositeOperation = 'destination-in';
-  p5.Image.prototype.copy.apply(this, copyArgs);
+  p5.Image.prototype.copy_t.apply(this, copy_tArgs);
   this.drawingContext.globalCompositeOperation = currBlend;
 };
 
@@ -21754,7 +21754,7 @@ _dereq_('../color/p5.Color');
  * <br><br>
  * Note that this is not a standard javascript array.  This means that
  * standard javascript functions such as <code>slice()</code> or
- * <code>arrayCopy()</code> do not
+ * <code>arraycopy_t()</code> do not
  * work.</p>
  *
  * @property {Number[]} pixels
@@ -21871,7 +21871,7 @@ p5.prototype.blend = function() {
  * automatically resize source pixels to fit the specified
  * target region.
  *
- * @method copy
+ * @method copy_t
  * @param  {p5.Image|undefined} srcImage source image
  * @param  {Integer} sx X coordinate of the source's upper left corner
  * @param  {Integer} sy Y coordinate of the source's upper left corner
@@ -21892,7 +21892,7 @@ p5.prototype.blend = function() {
  *
  * function setup() {
  *   background(img);
- *   copy(img, 7, 22, 10, 10, 35, 25, 50, 50);
+ *   copy_t(img, 7, 22, 10, 10, 35, 25, 50, 50);
  *   stroke(255);
  *   noFill();
  *   // Rectangle shows area being copied
@@ -21906,8 +21906,8 @@ p5.prototype.blend = function() {
  * image of rockies. Brickwall images on left and right. Right translucent
  *
  */
-p5.prototype.copy = function () {
-  p5.Renderer2D._copyHelper.apply(this, arguments);
+p5.prototype.copy_t = function () {
+  p5.Renderer2D._copy_tHelper.apply(this, arguments);
 };
 
 /**
@@ -22218,7 +22218,7 @@ p5.prototype.loadPixels = function() {
  * @param {Number}              x x-coordinate of the pixel
  * @param {Number}              y y-coordinate of the pixel
  * @param {Number|Array|Object} c insert a grayscale value | a pixel array |
- *                                a p5.Color object | a p5.Image to copy
+ *                                a p5.Color object | a p5.Image to copy_t
  * @example
  * <div>
  * <code>
@@ -25260,7 +25260,7 @@ p5.XML = function () {
 
 
 /**
- * Gets a copy of the element's parent. Returns the parent as another
+ * Gets a copy_t of the element's parent. Returns the parent as another
  * p5.XML object.
  *
  * @method getParent
@@ -27269,21 +27269,21 @@ p5.Vector.prototype.set = function (x, y, z) {
 };
 
 /**
- * Gets a copy of the vector, returns a p5.Vector object.
+ * Gets a copy_t of the vector, returns a p5.Vector object.
  *
- * @method copy
- * @return {p5.Vector} the copy of the p5.Vector object
+ * @method copy_t
+ * @return {p5.Vector} the copy_t of the p5.Vector object
  * @example
  * <div class="norender">
  * <code>
  * var v1 = createVector(1, 2, 3);
- * var v2 = v1.copy();
+ * var v2 = v1.copy_t();
  * print(v1.x == v2.x && v1.y == v2.y && v1.z == v2.z);
  * // Prints "true"
  * </code>
  * </div>
  */
-p5.Vector.prototype.copy = function () {
+p5.Vector.prototype.copy_t = function () {
   if (this.p5) {
     return new p5.Vector(this.p5,[this.x, this.y, this.z]);
   } else {
@@ -27612,7 +27612,7 @@ p5.Vector.prototype.cross = function (v) {
  * </div>
  */
 p5.Vector.prototype.dist = function (v) {
-  var d = v.copy().sub(this);
+  var d = v.copy_t().sub(this);
   return d.mag();
 };
 
@@ -27790,7 +27790,7 @@ p5.Vector.prototype.lerp = function (x, y, z, amt) {
 /**
  * Return a representation of this vector as a float array. This is only
  * for temporary use. If used in any other fashion, the contents should be
- * copied by using the <b>p5.Vector.copy()</b> method to copy into your own
+ * copied by using the <b>p5.Vector.copy_t()</b> method to copy_t into your own
  * array.
  *
  * @method array
@@ -28006,7 +28006,7 @@ p5.Vector.random3D = function () {
 
 p5.Vector.add = function (v1, v2, target) {
   if (!target) {
-    target = v1.copy();
+    target = v1.copy_t();
   } else {
     target.set(v1);
   }
@@ -28027,7 +28027,7 @@ p5.Vector.add = function (v1, v2, target) {
 
 p5.Vector.sub = function (v1, v2, target) {
   if (!target) {
-    target = v1.copy();
+    target = v1.copy_t();
   } else {
     target.set(v1);
   }
@@ -28047,7 +28047,7 @@ p5.Vector.sub = function (v1, v2, target) {
  */
 p5.Vector.mult = function (v, n, target) {
   if (!target) {
-    target = v.copy();
+    target = v.copy_t();
   } else {
     target.set(v);
   }
@@ -28066,7 +28066,7 @@ p5.Vector.mult = function (v, n, target) {
  */
 p5.Vector.div = function (v, n, target) {
   if (!target) {
-    target = v.copy();
+    target = v.copy_t();
   } else {
     target.set(v);
   }
@@ -28125,7 +28125,7 @@ p5.Vector.dist = function (v1,v2) {
  */
 p5.Vector.lerp = function (v1, v2, amt, target) {
   if (!target) {
-    target = v1.copy();
+    target = v1.copy_t();
   } else {
     target.set(v1);
   }
@@ -29766,7 +29766,7 @@ function areaTriangle(a, b, c) {
   return (((b[0] - a[0]) * (c[1] - a[1])) - ((c[0] - a[0]) * (b[1] - a[1])));
 }
 
-// Portions of below code copyright 2008 Dmitry Baranovskiy (via MIT license)
+// Portions of below code copy_tright 2008 Dmitry Baranovskiy (via MIT license)
 
 function findDotsAtSegment(p1x, p1y, c1x, c1y, c2x, c2y, p2x, p2y, t) {
 
@@ -30295,18 +30295,18 @@ p5.prototype.append = function(array, value) {
  * Copies an array (or part of an array) to another array. The src array is
  * copied to the dst array, beginning at the position specified by
  * srcPosition and into the position specified by dstPosition. The number of
- * elements to copy is determined by length. Note that copying values
+ * elements to copy_t is determined by length. Note that copy_ting values
  * overwrites existing values in the destination array. To append values
  * instead of overwriting them, use concat().
  * <br><br>
- * The simplified version with only two arguments, arrayCopy(src, dst),
+ * The simplified version with only two arguments, arraycopy_t(src, dst),
  * copies an entire array to another of the same size. It is equivalent to
- * arrayCopy(src, 0, dst, 0, src.length).
+ * arraycopy_t(src, 0, dst, 0, src.length).
  * <br><br>
- * Using this function is far more efficient for copying array data than
- * iterating through a for() loop and copying each element individually.
+ * Using this function is far more efficient for copy_ting array data than
+ * iterating through a for() loop and copy_ting each element individually.
  *
- * @method arrayCopy
+ * @method arraycopy_t
  * @param {Array}  src           the source Array
  * @param {Number} [srcPosition] starting position in the source Array
  * @param {Array}  dst           the destination Array
@@ -30326,13 +30326,13 @@ p5.prototype.append = function(array, value) {
  *    print(src); // ["A", "B", "C"]
  *    print(dst); // [ 1 ,  2 ,  3 ]
  *
- *    arrayCopy(src, srcPosition, dst, dstPosition, length);
+ *    arraycopy_t(src, srcPosition, dst, dstPosition, length);
  *    print(dst); // ["B", "C", 3]
  *
  *    }
  *  </div></code>
  */
-p5.prototype.arrayCopy = function(
+p5.prototype.arraycopy_t = function(
   src,
   srcPosition,
   dst,
@@ -32167,7 +32167,7 @@ function parseObj( model, lines ) {
               }
 
               vertIndex = indexedVerts[vertString] = model.vertices.length;
-              model.vertices.push(loadedVerts.v[vertParts[0]].copy());
+              model.vertices.push(loadedVerts.v[vertParts[0]].copy_t());
               if (loadedVerts.vt[vertParts[1]]) {
                 model.uvs.push(loadedVerts.vt[vertParts[1]].slice());
               } else {
@@ -32175,7 +32175,7 @@ function parseObj( model, lines ) {
               }
 
               if (loadedVerts.vn[vertParts[2]]) {
-                model.vertexNormals.push(loadedVerts.vn[vertParts[2]].copy());
+                model.vertexNormals.push(loadedVerts.vn[vertParts[2]].copy_t());
               }
             }
 
@@ -32739,8 +32739,8 @@ p5.Geometry.prototype.averagePoleNormals = function() {
 p5.Geometry.prototype.normalize = function() {
   if(this.vertices.length > 0) {
     // Find the corners of our bounding box
-    var maxPosition = this.vertices[0].copy();
-    var minPosition = this.vertices[0].copy();
+    var maxPosition = this.vertices[0].copy_t();
+    var minPosition = this.vertices[0].copy_t();
 
     for(var i = 0; i < this.vertices.length; i++) {
       maxPosition.x = Math.max(maxPosition.x, this.vertices[i].x);
@@ -32860,19 +32860,19 @@ p5.Matrix.prototype.set = function (inMatrix) {
 };
 
 /**
- * Gets a copy of the vector, returns a p5.Matrix object.
+ * Gets a copy_t of the vector, returns a p5.Matrix object.
  *
- * @return {p5.Matrix} the copy of the p5.Matrix object
+ * @return {p5.Matrix} the copy_t of the p5.Matrix object
  */
 p5.Matrix.prototype.get = function () {
   return new p5.Matrix(this.mat4);
 };
 
 /**
- * return a copy of a matrix
+ * return a copy_t of a matrix
  * @return {p5.Matrix}   the result matrix
  */
-p5.Matrix.prototype.copy = function(){
+p5.Matrix.prototype.copy_t = function(){
   var copied = new p5.Matrix();
   copied.mat4[0] = this.mat4[0];
   copied.mat4[1] = this.mat4[1];
@@ -34277,11 +34277,11 @@ p5.RendererGL.prototype.rotateZ = function(rad) {
 };
 
 /**
- * pushes a copy of the model view matrix onto the
+ * pushes a copy_t of the model view matrix onto the
  * MV Matrix stack.
  */
 p5.RendererGL.prototype.push = function() {
-  uMVMatrixStack.push(this.uMVMatrix.copy());
+  uMVMatrixStack.push(this.uMVMatrix.copy_t());
 };
 
 /**
